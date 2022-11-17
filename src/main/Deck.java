@@ -1,12 +1,17 @@
 import cards.Card;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Deck {
-    ArrayList<Card> deck = new ArrayList<Card>();
+    private List<Card> deck = new ArrayList<Card>();
 
-    public void shuffleDeck() {
-        //shuffle deck
+    public boolean isEmpty(){
+        return deck.isEmpty();
+    }
+
+    public void shuffleAndCreate() {
+        //add all carts to deck and shuffle them random
     }
 
     public void storeCard(Card aCard) {
@@ -14,7 +19,11 @@ public class Deck {
     }
 
     public Card drawCard(){
-        //return cards.Card or cardStrategy?
+        if (isEmpty()) {
+            shuffleAndCreate();
+            System.out.println("The deck has been created or reshuffled");
+        }
+        return deck.remove(deck.size()-1);
     }
 
 
