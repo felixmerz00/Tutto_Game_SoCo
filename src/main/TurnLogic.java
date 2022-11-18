@@ -1,13 +1,23 @@
-public class TurnLogic {
-    private int turnPoints = 0;
+import dice.DiceCollection;
 
-    public void setPlayerTurn() {
-        //this player is at turn (for each player there is a new round)
+public class TurnLogic {
+    private int turnPoints;
+    private Player currentPlayer;
+    private DiceCollection aDiceCollection;
+
+    public TurnLogic() {
+        this.aDiceCollection = new DiceCollection();
     }
 
-    public void playTurn() {
-        /*draw card from deck, tell user what card, tell user what he's allowed to do,
-        forward dice roll and result, apply card logic to current turn, sum up points*/
+    public void playTurn(Player currPlayer) {
+        this.currentPlayer = currPlayer;    // Tell the TurnLogic which player is playing right now.
+        this.turnPoints = 0;
+        // draw card from deck,
+        // tell user what card,
+        // tell user what he's allowed to do,
+        /* forward dice roll and result, apply card logic to current turn (access the correct card
+        * logic based how the STRATEGY pattern was implemented), sum up points, update points of the currentPlayer */
+
     }
 
     public void addPoints(int points) {

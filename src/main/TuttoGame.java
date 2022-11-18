@@ -43,12 +43,13 @@ public class TuttoGame {
 
     public void playGame() {
         //apply rules and assign players to turn
-        /* Let players take turns
-        * Check maxPoints was reached.
-        * Get input if the player wants to take his turn (R) or display the scores (D) of all players. */
+        /* Get input if the player wants to take his turn (R) or display the scores (D) of all players
+        * Let players take turns (delegated to TurnLogic)
+        * Check maxPoints was reached. */
     }
 
     public void endGame() {
-        //check if any player has 6000 points and announce winner
+        // Compare scores of the players
+        // Print Ranking
     }
 }
