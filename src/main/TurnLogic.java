@@ -21,6 +21,6 @@ public class TurnLogic {
     }
 
     public void addPoints(int points) {
-        turnPoints += points;
+        this.turnPoints += points;
     }
 }
