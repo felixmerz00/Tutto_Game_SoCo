@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Deck {
     private List<Card> deck = new ArrayList<Card>();
+    private int index;  // Index where we are at with drawing cards. If index == deck.length(), then the deck is empty.
 
     public Deck() {
         // Instantiate all cards with FLYWEIGHT dp. See: https://refactoring.guru/design-patterns/flyweight maybe use Factory class and other classes
@@ -23,15 +24,12 @@ public class Deck {
         // reorder all carts random and set index to zero
     }
 
-    public void storeCard(Card aCard) {
-        //store aCard to deck
-    }
-
     public Card drawCard(){
         if (isEmpty()) {
             shuffle();
             System.out.println("The deck has been created or reshuffled");
         }
-        return deck.remove(deck.size()-1);
+        this.index++;
+        return deck.get(index-1);
     }
 }
