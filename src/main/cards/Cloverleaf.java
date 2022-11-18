@@ -1,6 +1,6 @@
 package cards;
 
-public class CloverLeaf extends Card {
+public class Cloverleaf extends Card {
 
     @Override
     public void name() {
