@@ -91,57 +91,72 @@ public class TuttoGame {
     }
 
     public void playGame(int numberOfPlayers) {
-        //apply rules and assign players to turn
-        for (int player = 0; player < numberOfPlayers; player++) {
+        boolean gameEnd = false;
+        while (!gameEnd) {
+            //apply rules and assign players to turn for a round
+            for (int player = 0; player < numberOfPlayers; player++) {
 
-            //Get input if the player wants to take his turn (R) or display the scores (D) of all players
-            String r = "R";
-            String d = "D";
-            boolean validInput = false;
-            System.out.print("Enter R to play your turn or smack the D to display scores of all players: ");
-            boolean displayScores = false;
-            while (!validInput) {
-                Scanner scan = new Scanner(System.in);
-                String line = scan.nextLine();
-                if (line.length() == 1) { // check that input is only one char
-                    if (line.equals(r)) { //check that this char is either R or D
-                        validInput = true;
-                    }
-                    if (line.equals(d)){
-                        displayScores = true;
-                        validInput = true;
-                    }
-                    else {
-                        System.out.print("Such a challenge to hit the right key you twat?!\nTry again, but use your brain: ");
-                    }
+                //Get input if the player wants to take his turn (R) or display the scores (D) of all players
+                String r = "R";
+                String d = "D";
+                boolean validInput = false;
+                System.out.print("Enter R to play your turn or smack the D to display scores of all players: ");
+                boolean displayScores = false;
+                while (!validInput) {
+                    Scanner scan = new Scanner(System.in);
+                    String line = scan.nextLine();
+                    if (line.length() == 1) { // check that input is only one char
+                        if (line.equals(r)) { //check that this char is either R or D
+                            validInput = true;
+                        }
+                        if (line.equals(d)) {
+                            displayScores = true;
+                            validInput = true;
+                        } else {
+                            System.out.print("Such a challenge to hit the right key you twat?!\nTry again, but use your brain: ");
+                        }
 
+                    } else {
+                        System.out.print("Come on, one character is needed, either R or D!\nTry again: ");
+                    }
                 }
-                else{
-                    System.out.print("Come on, one character is needed, either R or D!\nTry again: ");
+                if (displayScores) {
+                    printScoreBoard();
                 }
-            }
-            if (displayScores) {
-                printScoreBoard();
-            }
 
-            // Let players take turns (delegated to TurnLogic)
-            TurnLogic turn = new TurnLogic();
-            turn.playTurn(playerList.get(player));
-        }
-        // Check maxPoints was reached.
-        if (maxPointsReached()){
-            endGame();
+                // Let players take turns (delegated to TurnLogic)
+                TurnLogic turn = new TurnLogic();
+                turn.playTurn(playerList.get(player));
+            }
+            // Check maxPoints was reached.
+            if (maxPointsReached()) {
+                gameEnd = endGame();
+            }
         }
     }
 
-    public void endGame() {
-        // Compare scores of the players
-        // Print Ranking
+    public boolean endGame() {
+        Player topPlayer = null;
+        int currentMax = 0;
+        for (Player player: playerList) {
+            if (player.getPoints() >= currentMax){
+                topPlayer = player;
+                currentMax = player.getPoints();
+            }
+        }
+        System.out.print("And the Winner is Player " + playerList.indexOf(topPlayer) + 1);
+        return true;
     }
 
     private boolean maxPointsReached(){
-        //check if any player hase more points than maxPoints
-        return false;
+        boolean maxPointsReached = false;
+        for (Player player: playerList){
+            if (player.getPoints() > maxPoints) {
+                maxPointsReached = true;
+                break;
+            }
+        }
+        return maxPointsReached;
     }
 
     public void printScoreBoard(){
