@@ -1,12 +1,13 @@
 package cards;
 
-public class TimesTwo extends Card{
+import strategy.CardStrategyInterface;
+import strategy.TimesTwoStrategy;
 
+public class TimesTwo extends Card{
     private String cardName = "x2";
 
-    @Override
-    public void display() {
-        System.out.println(cardName);
-        return;
+    /*Constructor creates instance of TimesTwoStrategy*/
+    public TimesTwo() {
+        this.Strategy = new TimesTwoStrategy();
     }
 }

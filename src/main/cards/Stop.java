@@ -1,13 +1,13 @@
 package cards;
 
+import strategy.CardStrategyInterface;
+import strategy.StopStrategy;
+
 public class Stop extends Card{
-
-
     private String cardName = "Stop";
 
-    @Override
-    public void display() {
-        System.out.println(cardName);
-        return;
+    /*Constructor creates instance of StopStrategy*/
+    public Stop() {
+        this.Strategy = new StopStrategy();
     }
 }

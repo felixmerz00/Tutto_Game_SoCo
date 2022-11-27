@@ -1,13 +1,13 @@
 package cards;
 
-public class Cloverleaf extends Card {
+import strategy.CardStrategyInterface;
+import strategy.CloverleafStrategy;
 
+public class Cloverleaf extends Card {
     private String cardName = "Cloverleaf";
 
-    @Override
-    public void display() {
-        System.out.println(cardName);
-        return;
+    /*Constructor creates instance of CloverleafStrategy*/
+    public Cloverleaf() {
+        this.Strategy = new CloverleafStrategy();
     }
-
 }

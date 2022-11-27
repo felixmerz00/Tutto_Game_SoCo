@@ -1,12 +1,13 @@
 package cards;
 
-public class PlusMinus extends Card{
+import strategy.CardStrategyInterface;
+import strategy.PlusMinusStrategy;
 
+public class PlusMinus extends Card{
     private String cardName = "Plus/Minus";
 
-    @Override
-    public void display() {
-        System.out.println(cardName);
-        return;
+    /*Constructor creates instance of PlusMinusStrategy*/
+    public PlusMinus() {
+        this.Strategy = new PlusMinusStrategy();
     }
 }

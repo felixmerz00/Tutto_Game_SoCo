@@ -1,12 +1,13 @@
 package cards;
 
-public class Fireworks extends Card {
+import strategy.CardStrategyInterface;
+import strategy.FireworksStrategy;
 
+public class Fireworks extends Card {
     private String cardName = "Fireworks";
 
-    @Override
-    public void display() {
-        System.out.println(cardName);
-        return;
+    /*constructor creates new instance of FireworksStrategy*/
+    public Fireworks() {
+        this.Strategy = new FireworksStrategy();
     }
 }
