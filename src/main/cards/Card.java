@@ -1,8 +1,6 @@
 package cards;
 
 public abstract class Card {
+    public void display() {}
 
-    public abstract void name();
-
-    }
 }

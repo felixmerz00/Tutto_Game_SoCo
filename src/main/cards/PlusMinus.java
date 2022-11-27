@@ -1,8 +1,12 @@
 package cards;
 
 public class PlusMinus extends Card{
-    @Override
-    public void name() {
 
+    private String cardName = "Plus/Minus";
+
+    @Override
+    public void display() {
+        System.out.println(cardName);
+        return;
     }
 }

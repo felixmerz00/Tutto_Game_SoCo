@@ -10,6 +10,7 @@ public class Deck {
     public Deck() {
         // Instantiate all cards with FLYWEIGHT dp. See: https://refactoring.guru/design-patterns/flyweight maybe use Factory class and other classes
         // Put cards in deck
+
         shuffle();  // Shuffle deck
         index = 0;
     }
