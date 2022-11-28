@@ -1,3 +1,4 @@
+package strategy;
 public class Tuple {
     /* This class exists, because tuples do not exist in Java. So the concrete strategy can
     * return "new Tuple(0, false)" for example. In the TurnLogic I can then use this information.
