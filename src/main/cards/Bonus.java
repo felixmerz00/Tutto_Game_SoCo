@@ -44,8 +44,6 @@ public class Bonus extends Card {
     }
     @Override
     public void display() {
-        System.out.println(this.cardName);
-        System.out.println(bonusPoints);
-        return;
+        System.out.println(this.cardName + "(" + bonusPoints + ")");
     }
 }

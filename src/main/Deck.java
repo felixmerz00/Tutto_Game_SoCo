@@ -51,17 +51,30 @@ public class Deck {
         }
 
         shuffle();  // Shuffle deck
-        index = 0;
     }
 
     public boolean isEmpty(){
-        //check index
-        // if index > listlen return true;
-        return deck.isEmpty();
+        boolean isEmpty = false;
+        if (index >= deck.size()) {isEmpty = true;}
+        return isEmpty;
     }
 
     private void shuffle() {
         // reorder all carts random and set index to zero
+        int len = deck.size();
+        for (int i=0; i<len; i++) {
+            /*generate random number between 0 and 56 (56 exclusive) */
+            int randomIndex = i + (int) ((len-i)*Math.random());
+
+            /*swap deck[i] with deck[randomIndex]*/
+            Card iPlace = deck.get(i);
+            Card randPlace = deck.get(randomIndex);
+            deck.remove(i);
+            deck.add(i, randPlace);
+            deck.remove(randomIndex);
+            deck.add(randomIndex, iPlace);
+        }
+        index = 0;
     }
 
     public Card drawCard(){
@@ -70,6 +83,9 @@ public class Deck {
             System.out.println("The deck has been created or reshuffled");
         }
         this.index++;
-        return deck.get(index-1);
+        Card topCard = deck.get(index-1);
+        /*display Card name and then return Card*/
+        topCard.display();
+        return topCard;
     }
 }
