@@ -1,6 +1,7 @@
 package cards;
 
 import strategy.CardStrategyInterface;
+import strategy.Tuple;
 
 public abstract class Card {
     public String cardName;
@@ -18,7 +19,7 @@ public abstract class Card {
     }
 
     /*check what to return in this method -> tuple*/
-    public double[] callStrategy() {
+    public Tuple callStrategy() {
          return this.Strategy.executeStrategy();
         /*maybe check if Strategy has value (one of 11 concreteCardStrategy)...? */
     }

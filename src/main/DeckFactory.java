@@ -65,7 +65,6 @@ public class DeckFactory {
             deckMap.put(name, card);
         }
         return card;
-
     }
 
     public static Bonus getBonusCards(Integer bonusPoints) {
