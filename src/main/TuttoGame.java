@@ -1,9 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.*;
-import java.util.*;
 import java.lang.*;
-import java.math.*;
 
 public class TuttoGame {
 
@@ -160,6 +157,13 @@ public class TuttoGame {
     }
 
     public void printScoreBoard(){
-        //prints scoreboard
+        System.out.print("----------------------------");
+        System.out.print("Scoreboard:");
+        int count = 1;
+        for (Player player: playerList){
+            System.out.print(count + ".  " + player.getName() + " has " + player.getPoints() + "points");
+            count += 1;
+        }
+        System.out.print("----------------------------");
     }
 }
