@@ -1,30 +1,32 @@
 import cards.Card;
 import dice.DiceCollection;
+import strategy.*;
 
 import java.util.Scanner;
 
 public class TurnLogic {
-    private int turnPoints; // Question to my future self: Do I need this field or can I just a local variable in the playTurn() method without storing it.
+    private int turnPoints; // Question to my future self: Do I need this field or can I just use a local variable in the playTurn() method without storing it.
     private Player currentPlayer;   // Question to my future self: Do I need this field or can I just use the passed parameter from  the playTurn() method without storing it.
     private DiceCollection aDiceCollection;
+    private Deck aDeck;
 
     public TurnLogic() {
-        this.aDiceCollection = new DiceCollection();
+        aDiceCollection = new DiceCollection();
+        aDeck = new Deck();
     }
 
     public void playTurn(Player currPlayer) {
         this.currentPlayer = currPlayer;    // Tell the TurnLogic which player is playing right now.
-        this.turnPoints = 0;
+        turnPoints = 0;
         boolean turnUnfinished = true;  // The turn is unfinished as long as the player keeps rolling Tutto, except if he decides to finish his turn.
         Tuple resultFromRoll;
         while(turnUnfinished) {
-            // draw card from deck, --> To do this I need access to the deck. I asked Andre on teams if we can store the deck in this class instead of the TuttoGame class
-            Card currentCard = Deck.drawCard();
-            // tell user what card, --> I asked Melea if she can implement a display() method
-            currentCard.display();
-            /* forward dice roll and result, apply card logic to current turn (access the correct card
-             * logic based how the STRATEGY pattern was implemented), sum up points, update points of the currentPlayer */
-            // I need two the following information: How many points were achieved? Can the player continue playing? (He can continue if he accomplished Tutto)?
+            Card currentCard = aDeck.drawCard();    // draw card from deck
+            currentCard.display();  // tell user what card was drawn
+            /* Delegate dice roll, to the concrete Card Strategy.
+            * I store the following information in a Tuple:
+            * How many points were achieved?
+            * Can the player continue playing? (He can continue if he accomplished Tutto.)? */
             resultFromRoll = currentCard.callStrategy();
             turnPoints += resultFromRoll.points;
             if(resultFromRoll.points == 0) { // This means the roll was a Null. All points get deleted and the turn is over.
