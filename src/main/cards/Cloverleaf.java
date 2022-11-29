@@ -4,10 +4,10 @@ import strategy.CardStrategyInterface;
 import strategy.CloverleafStrategy;
 
 public class Cloverleaf extends Card {
-    private String cardName = "Cloverleaf";
 
     /*Constructor creates instance of CloverleafStrategy*/
-    public Cloverleaf() {
+    public Cloverleaf(String name) {
+        this.cardName = name;
         this.Strategy = new CloverleafStrategy();
     }
 }

@@ -1,13 +1,13 @@
 package cards;
 
 import strategy.CardStrategyInterface;
+import strategy.CloverleafStrategy;
 import strategy.TimesTwoStrategy;
 
 public class TimesTwo extends Card{
-    private String cardName = "x2";
-
     /*Constructor creates instance of TimesTwoStrategy*/
-    public TimesTwo() {
+    public TimesTwo(String name) {
+        this.cardName = name;
         this.Strategy = new TimesTwoStrategy();
     }
 }
