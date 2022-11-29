@@ -1,10 +1,7 @@
 package strategy;
 
 public interface CardStrategyInterface {
-
-    static void executeStrategy() {
-
-    }
+    Tuple executeStrategy();
 }
 
 
