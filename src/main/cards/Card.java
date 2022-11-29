@@ -11,7 +11,7 @@ public abstract class Card {
     public void display() {
         System.out.println(this.cardName);
     }
-    private void callStrategy() {
+    public void callStrategy() {
         /*check if Strategy has value (one of 11 concreteCardStrategy) */
         this.Strategy.executeStrategy();
         return;
