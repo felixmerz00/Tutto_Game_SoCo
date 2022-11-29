@@ -8,10 +8,10 @@ public class Tuple {
     * How many points were achieved? Because TurnLogic must update the score in the Player object.
     * Did the player achieve Tutto? Because if he did, he can draw another card and roll the dice again. */
     public int points;
-    public boolean achievedTutto;
+    public boolean success;
 
     public Tuple(int points, boolean achievedTutto){
         this.points = points;
-        this.achievedTutto = achievedTutto;
+        this.success = achievedTutto;
     }
 }
