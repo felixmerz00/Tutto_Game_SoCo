@@ -11,31 +11,76 @@ public class TuttoGame {
 
     private final int numberOfPlayers;
 
-    private Deck aDeck;
-
     private ArrayList<Player> playerList;
 
+    private final TurnLogic turn;
+
     public static void main(String[] args){
+
         TuttoGame aGame = new TuttoGame();
+        aGame.playGame(aGame.numberOfPlayers);
     }
+
 
     /* It is the constructors responsibility to set up the game.
      * Instantiate deck, players */
     public TuttoGame(){
         //set up game
-        this.maxPoints = inputMaxPoints();
-        this.numberOfPlayers = inputNumberOfPlayers();
+        maxPoints = inputMaxPoints();
+        numberOfPlayers = inputNumberOfPlayers();
+        playerList = new ArrayList<Player>();
+        turn = new TurnLogic();
 
         // Add the number of players that were requested
         for (int i = 0; i < numberOfPlayers; i++){
             playerList.add(new Player(i+1));
         }
+    }
 
-        // Instantiate Deck
-        this.aDeck = new Deck();
 
-        // Instantiate TurnLogic with SINGLETON
-        playGame(numberOfPlayers);
+    public void playGame(int numberOfPlayers) {
+        boolean gameEnd = false;
+        while (!gameEnd) {
+            //apply rules and assign players to turn for a round
+            for (int player = 0; player < numberOfPlayers; player++) {
+
+                //Get input if the player wants to take his turn (R) or display the scores (D) of all players
+                String r = "R";
+                String d = "D";
+                boolean validInput = false;
+                System.out.print("Enter R to play your turn or smack the D to display scores of all players: ");
+                boolean displayScores = false;
+                while (!validInput) {
+                    Scanner scan = new Scanner(System.in);
+                    String line = scan.nextLine();
+                    if (line.length() == 1) { // check that input is only one char
+                        if (line.equals(r)) { //check that this char is either R or D
+                            validInput = true;
+                        }
+                        if (line.equals(d)) {
+                            displayScores = true;
+                            validInput = true;
+                        } else {
+                            System.out.print("Such a challenge to hit the right key you twat?!\nTry again, but use your brain: ");
+                        }
+
+                    } else {
+                        System.out.print("Come on, one character is needed, either R or D!\nTry again: ");
+                    }
+                }
+
+                if (displayScores) {
+                    printScoreBoard();
+                }
+
+                // Let players take turns (delegated to TurnLogic)
+                turn.playTurn(playerList.get(player));
+            }
+            // Check maxPoints was reached.
+            if (maxPointsReached()) {
+                gameEnd = endGame();
+            }
+        }
     }
 
     // Ask for the number of players and validate the input
@@ -90,51 +135,6 @@ public class TuttoGame {
         return winningPoints;
     }
 
-    public void playGame(int numberOfPlayers) {
-        boolean gameEnd = false;
-        while (!gameEnd) {
-            //apply rules and assign players to turn for a round
-            for (int player = 0; player < numberOfPlayers; player++) {
-
-                //Get input if the player wants to take his turn (R) or display the scores (D) of all players
-                String r = "R";
-                String d = "D";
-                boolean validInput = false;
-                System.out.print("Enter R to play your turn or smack the D to display scores of all players: ");
-                boolean displayScores = false;
-                while (!validInput) {
-                    Scanner scan = new Scanner(System.in);
-                    String line = scan.nextLine();
-                    if (line.length() == 1) { // check that input is only one char
-                        if (line.equals(r)) { //check that this char is either R or D
-                            validInput = true;
-                        }
-                        if (line.equals(d)) {
-                            displayScores = true;
-                            validInput = true;
-                        } else {
-                            System.out.print("Such a challenge to hit the right key you twat?!\nTry again, but use your brain: ");
-                        }
-
-                    } else {
-                        System.out.print("Come on, one character is needed, either R or D!\nTry again: ");
-                    }
-                }
-                if (displayScores) {
-                    printScoreBoard();
-                }
-
-                // Let players take turns (delegated to TurnLogic)
-                TurnLogic turn = new TurnLogic();
-                turn.playTurn(playerList.get(player));
-            }
-            // Check maxPoints was reached.
-            if (maxPointsReached()) {
-                gameEnd = endGame();
-            }
-        }
-    }
-
     public boolean endGame() {
         Player topPlayer = null;
         int currentMax = 0;
@@ -144,7 +144,7 @@ public class TuttoGame {
                 currentMax = player.getPoints();
             }
         }
-        System.out.print("And the Winner is Player " + playerList.indexOf(topPlayer) + 1);
+        System.out.print("And the Winner is " + topPlayer.getName());
         return true;
     }
 
