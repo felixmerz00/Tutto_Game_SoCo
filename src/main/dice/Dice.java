@@ -22,7 +22,8 @@ public class Dice{
         return this.eyes;
     }
 
-    public void printDice(){
-        System.out.print(this.eyes);
+    @Override
+    public String toString() {
+        return "" + eyes + "";
     }
 }

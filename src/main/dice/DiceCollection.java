@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class DiceCollection {
     //create 6 dices
     private final ArrayList<Dice> TheDice = new ArrayList<>();
+    private final ArrayList<Dice> putBackDice = new ArrayList<>();
 
     private int points = 0;
 
@@ -12,7 +13,7 @@ public class DiceCollection {
     private int remainingDice = 6;
 
     public DiceCollection() {
-        for(int i = 0; i < remainingDice; i++){
+        for(int i = 0; i < 6; i++){ //6 because else we could call the constructor and create a diceCollection with remainingDice != 6
             Dice aDice = new Dice();
             TheDice.add(aDice);
         }
@@ -21,24 +22,19 @@ public class DiceCollection {
 
     //roll remainingDices
     public void rollDices(){
-        for(int i = 0; i < remainingDice; i++){
-            //roll remainingDices
-            TheDice.get(i).rollDice();
-            System.out.print(" ");
-            TheDice.get(i).printDice();
-            System.out.print(",");
+        for (Dice aDice : TheDice) {
+            aDice.rollDice();
         }
-        System.out.println(" ");
-
     }
+
     //@PRE: DiceCollection has enough Dices left
     //      Number is int from 1,...,6
     //      Boolean triplet is true if and only if aDiceCollection has a triplet
     public void putDiceAway(int Number, Boolean triplet){
 
-        int drillingIndex = 0;
+        int tripletIndex = 0;
 
-        for(int i = 0;i < remainingDice && drillingIndex <= 3; i++){ //if player wants to put a way a drilling but rolled more than 3 of the same
+        for(int i = 0;i < remainingDice && tripletIndex <= 3; i++){ //if player wants to put a way a drilling but rolled more than 3 of the same
             Dice aDice = TheDice.get(i);
             if(aDice.diceResult() == Number){
                 //found a die with number, one fewer die can be used
@@ -46,13 +42,13 @@ public class DiceCollection {
 
                 //put Dice to the end of ArrayList, such that the first remaining dices are used.
                 TheDice.remove(i);
-                TheDice.add(aDice);
+                putBackDice.add(aDice);
                 i--;
 
                 if(!triplet){
                     break;
                 }
-                else drillingIndex++;
+                else tripletIndex++;
 
             }
         }
@@ -71,20 +67,20 @@ public class DiceCollection {
 
     public void printDiceCollection(){
         System.out.println("Your remaining Dice: ");
-        for(int i = 0; i < remainingDice;i++){
-            TheDice.get(i).printDice();
+        for (Dice aDice : TheDice) {
+            System.out.print(aDice);
             System.out.print(", ");
         }
         System.out.println(" ");
         System.out.println("The Dice you put back: ");
-        for(int i = remainingDice; i < 6 ;i++){
-            TheDice.get(i).printDice();
+        for (Dice aDice : putBackDice) {
+            System.out.print(aDice);
             System.out.print(", ");
         }
         System.out.println(" ");
     }
     public boolean isTutto(){
-        return remainingDice == 0;
+        return TheDice.isEmpty();
     }
 
     public int getPoints() {
@@ -92,16 +88,16 @@ public class DiceCollection {
     }
 
     public boolean hasFive(){
-        for(int i = 0; i < remainingDice; i++){
-            if(TheDice.get(i).diceResult() == 5){
+        for(Dice aDice: TheDice){
+            if(aDice.diceResult() == 5){
                 return true;
             }
         }
         return false;
     }
     public boolean hasOne(){
-        for(int i = 0; i < remainingDice; i++){
-            if(TheDice.get(i).diceResult() == 1 ){
+        for(Dice aDice : TheDice){
+            if(aDice.diceResult() == 1 ){
                 return true;
             }
         }
@@ -151,6 +147,9 @@ public class DiceCollection {
     }
 
     public boolean isNull() {
-        return hasTriplet() || hasFive() || hasOne();
+        return !hasTriplet() && !hasFive() && !hasOne();
+    }
+    public boolean isEmpty(){
+        return TheDice.isEmpty();
     }
 }
