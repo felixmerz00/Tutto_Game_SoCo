@@ -2,9 +2,6 @@ package cards;
 
 import strategy.CardStrategyInterface;
 
-import java.util.Arrays;
-import java.util.List;
-
 public abstract class Card {
     public String cardName;
 
@@ -21,9 +18,8 @@ public abstract class Card {
     }
 
     /*check what to return in this method -> tuple*/
-    public void callStrategy() {
-        /*check if Strategy has value (one of 11 concreteCardStrategy) */
-        this.Strategy.executeStrategy();
-        return;
+    public double[] callStrategy() {
+         return this.Strategy.executeStrategy();
+        /*maybe check if Strategy has value (one of 11 concreteCardStrategy)...? */
     }
 }
