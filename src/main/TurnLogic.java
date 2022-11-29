@@ -32,8 +32,10 @@ public class TurnLogic {
             if(resultFromRoll.points == 0) { // This means the roll was a Null. All points get deleted and the turn is over.
                 turnPoints = 0;
             }
-            if(resultFromRoll.achievedTutto){ // If player achieved Tutto, ask him if he wants to continue
-                // Ask player if he wants to continue and update turnUnfinished based on his response
+            if(resultFromRoll.success){
+                // Implement behavior for cloverleaf: Problem: I cannot end the game, this is done in the TuttoGame class.
+                // Implement behavior for plus/minus card: Problem: I cannot access the other Players, this is done in the TuttoGame class.
+                // If the player achieved Tutto, ask player if he wants to continue playing
                 turnUnfinished = playerWantsToContinuePlaying();
             }
         }
