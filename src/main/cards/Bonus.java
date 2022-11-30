@@ -43,7 +43,7 @@ public class Bonus extends Card {
         }
     }
     @Override
-    public void display() {
-        System.out.println(this.cardName + "(" + bonusPoints + ")");
+    public String display() {
+        return this.cardName + "(" + Integer.toString(bonusPoints) + ")";
     }
 }

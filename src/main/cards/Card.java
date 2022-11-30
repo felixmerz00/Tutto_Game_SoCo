@@ -14,8 +14,8 @@ public abstract class Card {
         cardName = name;
     }*/
 
-    public void display() {
-        System.out.println(cardName);
+    public String display() {
+        return cardName;
     }
 
     public CardStrategyInterface getStrategy() {
