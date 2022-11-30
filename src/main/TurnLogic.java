@@ -5,8 +5,6 @@ import strategy.*;
 import java.util.Scanner;
 
 public class TurnLogic {
-    private int turnPoints; // Question to my future self: Do I need this field or can I just use a local variable in the playTurn() method without storing it.
-    private Player currentPlayer;   // Question to my future self: Do I need this field or can I just use the passed parameter from  the playTurn() method without storing it.
     private DiceCollection aDiceCollection;
     private Deck aDeck;
 
@@ -16,8 +14,7 @@ public class TurnLogic {
     }
 
     public void playTurn(Player currPlayer) {
-        this.currentPlayer = currPlayer;    // Tell the TurnLogic which player is playing right now.
-        turnPoints = 0;
+        int turnPoints = 0;
         boolean turnUnfinished = true;  // The turn is unfinished as long as the player keeps rolling Tutto, except if he decides to finish his turn.
         Tuple resultFromRoll;
         while(turnUnfinished) {
@@ -40,7 +37,7 @@ public class TurnLogic {
             }
         }
         // Add scored points from this turn to the players total points
-        currentPlayer.updatePoints(turnPoints);
+        currPlayer.updatePoints(turnPoints);
     }
 
     /* Ask player if he wants to draw another card and continue playing.
