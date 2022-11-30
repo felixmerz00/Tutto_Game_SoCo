@@ -5,13 +5,13 @@ import dice.DiceCollection;
 import java.util.Objects;
 import java.util.Scanner;
 
-public abstract class BaseClass implements CardStrategyInterface{
-    protected DiceCollection aDiceCollection;
+public abstract class BaseStrategy implements CardStrategyInterface{
+    private DiceCollection aDiceCollection;
 
     //input validation for all strategies the same?
     //@PRE: triplet is a boolean and number an int between 1-6
     //@POST: (Number, Triplet) is in aDiceCollection
-    private boolean isValid(int Number, Boolean triplet){
+    protected boolean isValid(int Number, boolean triplet){
         if(Number == 5 && aDiceCollection.hasFive() && !triplet){
             return true;
         }
@@ -33,9 +33,9 @@ public abstract class BaseClass implements CardStrategyInterface{
     }
 
     @Override
-    public Tuple executeStrategy() {
+    public NullTuple executeStrategy() {
         aDiceCollection = new DiceCollection();
-        Tuple result = new Tuple(0,false);
+        NullTuple result = new NullTuple(0,false);
         boolean validInput;
         boolean rollAgain = false;
         boolean putBackAnother;
@@ -47,13 +47,15 @@ public abstract class BaseClass implements CardStrategyInterface{
         while(!aDiceCollection.isEmpty()){
 
             //roll aDiceCollection
+            System.out.println("You roll: ");
             aDiceCollection.rollDices();
             aDiceCollection.printDiceCollection();
 
             //check if null --> end strategy
             if(aDiceCollection.isNull()){
                 System.out.println(("You rolled Null and your turn ended. "));
-                result.points = 0;
+                result.Null = true;
+                result.points = aDiceCollection.getPoints();
                 result.success = false;
                 return result;
             }
@@ -140,7 +142,8 @@ public abstract class BaseClass implements CardStrategyInterface{
         }
         //you only get to this point when you rolled a null
         assert aDiceCollection.isNull();
-        result.points = 0;
+        result.points = aDiceCollection.getPoints();
+        result.Null = true;
         result.success = false;
         return result;
     }
