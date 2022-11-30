@@ -38,6 +38,15 @@ class TurnLogicTest {
         assertFalse(playerWantsToContinuePlaying());
     }
 
+    /* Test if the method TurnLogic.playerWantsToContinuePlaying returns true if the
+     * player enters a zero 1. */
+    @Test
+    void playerWantsToContinue2() {
+        String input = "1";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        assertTrue(playerWantsToContinuePlaying());
+    }
+
     // Helper method to make the UUT accessible (see chapter 5.7)
     private boolean playerWantsToContinuePlaying(){
         try{
