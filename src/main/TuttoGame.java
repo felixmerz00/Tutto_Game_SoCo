@@ -45,24 +45,25 @@ public class TuttoGame {
                 String r = "R";
                 String d = "D";
                 boolean validInput = false;
+                System.out.println("----------------------------\n");
                 System.out.print("Enter R to play your turn or smack the D to display scores of all players: ");
                 boolean displayScores = false;
                 while (!validInput) {
                     Scanner scan = new Scanner(System.in);
                     String line = scan.nextLine();
                     if (line.length() == 1) { // check that input is only one char
-                        if (line.equals(r)) { //check that this char is either R or D
+                        if (line.equals(r) || line.equals(d)) { //check that this char is either R or D
                             validInput = true;
+                            if (line.equals(d)) {
+                                displayScores = true;
+                            }
                         }
-                        if (line.equals(d)) {
-                            displayScores = true;
-                            validInput = true;
-                        } else {
-                            System.out.print("Such a challenge to hit the right key you twat?!\nTry again, but use your brain: ");
+                        else {
+                            System.out.print("Is it so hard to enter one of these two upper case letter you twat?!\nTry again, but use your brain: ");
                         }
 
                     } else {
-                        System.out.print("Come on, one character is needed, either R or D!\nTry again: ");
+                        System.out.print("Come on, only one character is needed, either R or D!\nTry again: ");
                     }
                 }
 
@@ -82,6 +83,7 @@ public class TuttoGame {
 
     // Ask for the number of players and validate the input
     private int inputNumberOfPlayers() {
+        System.out.println("\n----------------------------\n");
         System.out.println("Please enter the amount of player (min: 2, max: 4): "); // Ask user about input
 
         boolean validInput = false;
@@ -91,6 +93,7 @@ public class TuttoGame {
             if (scan.hasNextInt()) {
                 numPlayer = scan.nextInt();
                 if (numPlayer < 2 || numPlayer > 4) {
+                    System.out.println("\n----------------------------\n");
                     System.out.print("Get some friends or play in two groups!\nTry again with valid amount of players: ");
                 }
                 else{
@@ -98,11 +101,15 @@ public class TuttoGame {
                 }
             }
             else{
-                System.out.print("Do I really need to explain the range from 2 to 4 to you?\nTry again:");
+                System.out.println("\n----------------------------\n");
+                System.out.print("Between 2 and 4, that could be 2, 3 or 4 if you did not know that?\nTry again:");
             }
 
         }
-        System.out.println("Game with " + numPlayer + "initiated, have fun!");  // Output user input
+        System.out.println("\n----------------------------\n");
+        System.out.println("Game with " + numPlayer + " players initiated, have fun!");  // Output user input
+        System.out.println("\n----------------------------\n");
+
         return numPlayer;
     }
 
@@ -117,17 +124,18 @@ public class TuttoGame {
             if (scan.hasNextInt()) {
                 winningPoints = scan.nextInt();
                 if (winningPoints < 1000 || winningPoints > 10000) {
-                    System.out.print("Input must be between 1000 and 10000! Please enter new number: ");
+                    System.out.println("Input must be between 1000 and 10000! Please enter new number: ");
                 }
                 else{
                     validInput = true;
                 }
             }
             else{
-                System.out.print("Don't be silly, you know that a winning number must be an integer.\nTry again but make an effort:");
+                System.out.println("Don't be silly, you know that a winning number must be an integer.\nTry again but make an effort:");
             }
 
         }
+        System.out.println("\n----------------------------\n");
         System.out.println("First player to reach " + winningPoints + " points will be the winner!");  // Output user input
         return winningPoints;
     }
@@ -141,7 +149,7 @@ public class TuttoGame {
                 currentMax = player.getPoints();
             }
         }
-        System.out.print("And the Winner is " + topPlayer.getName());
+        System.out.println("And the Winner is " + topPlayer.getName());
         return true;
     }
 
@@ -157,13 +165,13 @@ public class TuttoGame {
     }
 
     public void printScoreBoard(){
-        System.out.print("----------------------------");
-        System.out.print("Scoreboard:");
+        System.out.println("----------------------------\n");
+        System.out.println("Scoreboard:\n");
         int count = 1;
         for (Player player: playerList){
-            System.out.print(count + ".  " + player.getName() + " has " + player.getPoints() + "points");
+            System.out.println(count + ".  " + player.getName() + " has " + player.getPoints() + " points");
             count += 1;
         }
-        System.out.print("----------------------------");
+        System.out.println("\n----------------------------\n");
     }
 }

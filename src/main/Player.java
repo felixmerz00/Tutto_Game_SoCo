@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class Player {
-    private int points = 0;
-    private String name;
+    private int points;
+    private final String name;
 
 
     public Player(int playerCount) {
@@ -13,10 +13,19 @@ public class Player {
     // Let user input his name
     private String inputName(int playerCount) {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Enter username for player " + playerCount);
-
-        String playerName = myObj.nextLine();  // Read user input
-        System.out.println("Username of player "+ playerCount +" is: " + playerName);  // Output user input
+        System.out.println("Enter username for player " + playerCount + ": ");
+        String playerName = null;
+        boolean validInput = false;
+        while (!validInput) {
+            playerName = myObj.nextLine();  // Read user input
+            if (playerName.length() > 0){
+                validInput = true;
+            }
+            else {
+                System.out.println("Name must be at least on character long, try again: ");
+            }
+        }
+        System.out.println("Username of player "+ playerCount +" is: " + playerName +"\n");  // Output user input
         return playerName;
     }
 
