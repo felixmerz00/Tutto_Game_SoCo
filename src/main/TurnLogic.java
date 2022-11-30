@@ -1,21 +1,22 @@
 import cards.Card;
+import cards.Cloverleaf;
+import cards.PlusMinus;
 import dice.DiceCollection;
 import strategy.*;
 
 import java.util.Scanner;
 
 public class TurnLogic {
-    private DiceCollection aDiceCollection;
-    private Deck aDeck;
-    private Context aContext;
+    private final Deck aDeck;
+    private final Context aContext;
 
     public TurnLogic() {
-        aDiceCollection = new DiceCollection();
         aDeck = new Deck();
         aContext = new Context();
     }
 
-    /*return an int, 0 = nothing needs to be handled, 1 = handle PlusMinus card, 2 = handle Cloverleaf card */
+    /* Does the TuttoGame class need to handle something?
+    * return 0 = nothing needs to be handled, 1 = handle PlusMinus card, 2 = handle Cloverleaf card */
     public int playTurn(Player currPlayer) {
         int turnPoints = 0;
         boolean turnUnfinished = true;  // The turn is unfinished as long as the player keeps rolling Tutto, except if he decides to finish his turn.
@@ -35,9 +36,14 @@ public class TurnLogic {
                 turnPoints = 0;
             }
             if(resultFromRoll.success){
-                // Implement behavior for cloverleaf: Problem: I cannot end the game, this is done in the TuttoGame class.
-                // Implement behavior for plus/minus card: Problem: I cannot access the other Players, this is done in the TuttoGame class.
-                // If the player achieved Tutto, ask player if he wants to continue playing
+                if(currentCard instanceof PlusMinus){
+                    currPlayer.updatePoints(1000);
+                    return 1;   // If the player was successful with his PlusMinus card, the TuttoGame object must deduct 1000 points from the leading player(s)
+                }
+                if(currentCard instanceof Cloverleaf){
+                    return 2;   // If the player was successful with his Cloverleaf card, the TuttoGame object must immediately end the game and declare him as winner.
+                }
+                // If the player achieved Tutto with any other card, ask player if he wants to continue playing
                 turnUnfinished = playerWantsToContinuePlaying();
             }
         }
