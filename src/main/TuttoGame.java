@@ -10,9 +10,9 @@ public class TuttoGame {
 
     private ArrayList<Player> playerList;
 
-    private final TurnLogic turn;
+    private static TurnLogic turn;
 
-    public static void main(String[] args){
+    public static void main(String[] args){ //rename this function as TuttoGame
 
         TuttoGame aGame = new TuttoGame();
         aGame.playGame();
@@ -21,12 +21,12 @@ public class TuttoGame {
 
     /* It is the constructors responsibility to set up the game.
      * Instantiate deck, players */
-    public TuttoGame(){
+    public TuttoGame(){ //setUpGame
         //set up game
         maxPoints = inputMaxPoints();
         numberOfPlayers = inputNumberOfPlayers();
-        playerList = new ArrayList<Player>();
-        turn = new TurnLogic();
+        playerList = new ArrayList<>();
+        turn = new TurnLogic(); //one turn per Game
 
         // Add the number of players that were requested
         for (int i = 0; i < numberOfPlayers; i++){
@@ -35,7 +35,7 @@ public class TuttoGame {
     }
 
 
-    public void playGame() {
+    public void playGame() { //copy this into TuttoGame
         boolean gameEnd = false;
         while (!gameEnd) {
             playRound();
@@ -68,7 +68,8 @@ public class TuttoGame {
                         }
                     }
                     else {
-                        System.out.print("Is it so hard to enter one of these two upper case letter you twat?!\nTry again, but use your brain: ");
+                        System.out.print("Is it so hard to enter one of these two upper case letter you twat?!\n" +
+                                "Try again, but use your brain: ");
                     }
 
                 } else {
