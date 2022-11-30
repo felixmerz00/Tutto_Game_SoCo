@@ -7,10 +7,12 @@ import java.util.Scanner;
 public class TurnLogic {
     private DiceCollection aDiceCollection;
     private Deck aDeck;
+    private Context aContext;
 
     public TurnLogic() {
         aDiceCollection = new DiceCollection();
         aDeck = new Deck();
+        aContext = new Context();
     }
 
     public void playTurn(Player currPlayer) {
@@ -24,7 +26,9 @@ public class TurnLogic {
             * I store the following information in a Tuple:
             * How many points were achieved?
             * Can the player continue playing? (He can continue if he accomplished Tutto.)? */
-            resultFromRoll = currentCard.callStrategy();
+            CardStrategyInterface aStragey = currentCard.getStrategy();
+            aContext.setStrategy(aStragey);
+            resultFromRoll = aContext.doSomething();
             turnPoints += resultFromRoll.points;
             if(resultFromRoll.points == 0) { // This means the roll was a Null. All points get deleted and the turn is over.
                 turnPoints = 0;

@@ -15,12 +15,10 @@ public abstract class Card {
     }*/
 
     public void display() {
-        System.out.println(this.cardName);
+        System.out.println(cardName);
     }
 
-    /*check what to return in this method -> tuple*/
-    public Tuple callStrategy() {
-         return this.Strategy.executeStrategy();
-        /*maybe check if Strategy has value (one of 11 concreteCardStrategy)...? */
+    public CardStrategyInterface getStrategy() {
+        return Strategy;
     }
 }
