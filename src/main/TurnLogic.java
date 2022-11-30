@@ -51,9 +51,10 @@ public class TurnLogic {
             System.out.println("Would you like to draw another card and continue playing?");
             System.out.println("Enter \"1\" for Yes, enter \"0\" for No.");
             if(scan.hasNextInt()){
-                if(scan.nextInt() == 1){
+                int input = scan.nextInt();
+                if(input == 1){
                     return true;
-                }else if(scan.nextInt() == 0){
+                }else if(input == 0){
                     return false;
                 }else{
                     System.out.print("Your input was invalid. Please try again.");
