@@ -44,6 +44,6 @@ public class Bonus extends Card {
     }
     @Override
     public String display() {
-        return this.cardName + "(" + Integer.toString(bonusPoints) + ")";
+        return this.cardName + " (" + Integer.toString(bonusPoints) + ")";
     }
 }
