@@ -15,7 +15,8 @@ public class TurnLogic {
         aContext = new Context();
     }
 
-    public void playTurn(Player currPlayer) {
+    /*return an int, 0 = nothing needs to be handled, 1 = handle PlusMinus card, 2 = handle Cloverleaf card */
+    public int playTurn(Player currPlayer) {
         int turnPoints = 0;
         boolean turnUnfinished = true;  // The turn is unfinished as long as the player keeps rolling Tutto, except if he decides to finish his turn.
         Tuple resultFromRoll;
@@ -26,8 +27,8 @@ public class TurnLogic {
             * I store the following information in a Tuple:
             * How many points were achieved?
             * Can the player continue playing? (He can continue if he accomplished Tutto.)? */
-            CardStrategyInterface aStragey = currentCard.getStrategy();
-            aContext.setStrategy(aStragey);
+            CardStrategyInterface aStrategy = currentCard.getStrategy();
+            aContext.setStrategy(aStrategy);
             resultFromRoll = aContext.doSomething();
             turnPoints += resultFromRoll.points;
             if(resultFromRoll.points == 0) { // This means the roll was a Null. All points get deleted and the turn is over.
