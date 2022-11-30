@@ -43,6 +43,7 @@ public class TurnLogic {
         }
         // Add scored points from this turn to the players total points
         currPlayer.updatePoints(turnPoints);
+        return 0;
     }
 
     /* Ask player if he wants to draw another card and continue playing.
