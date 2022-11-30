@@ -21,7 +21,7 @@ public class TuttoGame {
 
     /* It is the constructors responsibility to set up the game.
      * Instantiate deck, players */
-    public TuttoGame(){ //setUpGame
+    public TuttoGame(){ //constructor
         //set up game
         maxPoints = inputMaxPoints();
         numberOfPlayers = inputNumberOfPlayers();
