@@ -2,8 +2,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.io.StringBufferInputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -29,15 +29,25 @@ class TurnLogicTest {
     void playTurn() {
     }
 
-    // Copy code from chapter 5.7 to test private method.
+    /* Test if the method TurnLogic.playerWantsToContinuePlaying returns false if the
+    * player enters a zero 0. */
     @Test
-    void playerWantsToContinue() {
-        InputStream inStream = new StringBufferInputStream("0");
-        System.setIn(inStream);
+    void playerWantsToContinue1() {
+        String input = "0";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        assertFalse(playerWantsToContinuePlaying());
+    }
+
+    /* Test if the method TurnLogic.playerWantsToContinuePlaying returns true if the
+     * player enters a zero 1. */
+    @Test
+    void playerWantsToContinue2() {
+        String input = "1";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
         assertTrue(playerWantsToContinuePlaying());
     }
 
-    // Helper method to make the UUT accessible
+    // Helper method to make the UUT accessible (see chapter 5.7)
     private boolean playerWantsToContinuePlaying(){
         try{
             Method method = TurnLogic.class.getDeclaredMethod("playerWantsToContinuePlaying");
