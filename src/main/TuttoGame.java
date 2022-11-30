@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.lang.*;
 
@@ -49,13 +50,12 @@ public class TuttoGame {
     private void playRound() {
         //apply rules and assign players to turn for a round
         for (int player = 0; player < numberOfPlayers; player++) {
-
             //Get input if the player wants to take his turn (R) or display the scores (D) of all players
             String r = "R";
             String d = "D";
             boolean validInput = false;
             System.out.println("----------------------------\n");
-            System.out.print("Enter R to play your turn or smack the D to display scores of all players: ");
+            System.out.print("press R to roll dices\npress D to display scores\n");
             boolean displayScores = false;
             while (!validInput) {
                 Scanner scan = new Scanner(System.in);
@@ -80,11 +80,31 @@ public class TuttoGame {
             if (displayScores) {
                 printScoreBoard();
             }
-
             // Let players take turns (delegated to TurnLogic)
             System.out.println("\n----------------------------\n");
             System.out.println("It's your turn " + playerList.get(player).getName() + "!\n");
-            turn.playTurn(playerList.get(player));
+
+            int finishCondition;
+            finishCondition = turn.playTurn(playerList.get(player));
+
+            if (finishCondition == 2){ // Player achievs 2 tuttos in a row and instantly wins
+                playerList.get(player).updatePoints(maxPoints-playerList.get(player).getPoints()+1000000); //make a more clever solution
+                break;
+            }
+
+            if (finishCondition == 1){ //Player successful with plusMinus -> best player gets deducted 1000points
+                int bestPlayerPoints = 0;
+                for (int idx = 0; idx < numberOfPlayers; idx++) {
+                    if (playerList.get(idx).getPoints() > bestPlayerPoints){
+                        bestPlayerPoints = playerList.get(idx).getPoints();
+                    }
+                }
+                for (int idx = 0; idx < numberOfPlayers; idx++) {
+                    if (playerList.get(idx).getPoints() == bestPlayerPoints && player != idx){
+                        playerList.get(idx).updatePoints(-1000);
+                    }
+                }
+            }
         }
     }
 
@@ -158,7 +178,13 @@ public class TuttoGame {
                 currentMax = player.getPoints();
             }
         }
-        System.out.println("And the Winner is " + topPlayer.getName());
+        if (currentMax > 900000){
+            System.out.println("And the direct winner is " + topPlayer.getName() + "by scoring a Tutto!");
+        }
+        else{
+            System.out.println("And the Winner is " + topPlayer.getName());
+        }
+
         return true;
     }
 

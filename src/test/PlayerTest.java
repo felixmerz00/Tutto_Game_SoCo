@@ -19,8 +19,8 @@ class PlayerTest {
     void PlayerName() {
         String nameInput = "Timmy";
         System.setIn(new ByteArrayInputStream(nameInput.getBytes()));
-        Player playerTest = new Player(2);
-        assertEquals(nameInput, playerTest.getName());
+        Player playerTest1 = new Player(2);
+        assertEquals(nameInput, playerTest1.getName());
     }
 
     @Test
