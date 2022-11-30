@@ -1,6 +1,6 @@
 package strategy;
 
-public class CloverleafStrategy extends BaseClass{
+public class CloverleafStrategy extends BaseStrategy{
 //Has to play dice till 2 tuttos, when reached wins the game, else nothing happens
 
     // cant stop rolling the dice
@@ -10,7 +10,7 @@ public class CloverleafStrategy extends BaseClass{
     }
 
     @Override
-    public Tuple executeStrategy(){
+    public NullTuple executeStrategy(){
         System.out.println("Cloverleaf strat: ");
         //first dice game
         Tuple result = super.executeStrategy();
@@ -20,11 +20,10 @@ public class CloverleafStrategy extends BaseClass{
             Tuple result1 = super.executeStrategy();
             if(result1.success){
                 System.out.println("Congrats, you got the second Tutto! ");
-                return new Tuple(10000,true);
+                return new NullTuple(10000,true);
             }
-            else return  new Tuple(0,false);
+            else return  new NullTuple(0,false);
         }
-        else return  new Tuple(0,false);
+        else return  new NullTuple(0,false);
     }
 }
-
