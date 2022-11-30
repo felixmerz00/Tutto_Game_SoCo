@@ -15,7 +15,7 @@ public class TuttoGame {
     public static void main(String[] args){
 
         TuttoGame aGame = new TuttoGame();
-        aGame.playGame(aGame.numberOfPlayers);
+        aGame.playGame();
     }
 
 
@@ -35,51 +35,59 @@ public class TuttoGame {
     }
 
 
-    public void playGame(int numberOfPlayers) {
+    public void playGame() {
         boolean gameEnd = false;
         while (!gameEnd) {
-            //apply rules and assign players to turn for a round
-            for (int player = 0; player < numberOfPlayers; player++) {
-
-                //Get input if the player wants to take his turn (R) or display the scores (D) of all players
-                String r = "R";
-                String d = "D";
-                boolean validInput = false;
-                System.out.println("----------------------------\n");
-                System.out.print("Enter R to play your turn or smack the D to display scores of all players: ");
-                boolean displayScores = false;
-                while (!validInput) {
-                    Scanner scan = new Scanner(System.in);
-                    String line = scan.nextLine();
-                    if (line.length() == 1) { // check that input is only one char
-                        if (line.equals(r) || line.equals(d)) { //check that this char is either R or D
-                            validInput = true;
-                            if (line.equals(d)) {
-                                displayScores = true;
-                            }
-                        }
-                        else {
-                            System.out.print("Is it so hard to enter one of these two upper case letter you twat?!\nTry again, but use your brain: ");
-                        }
-
-                    } else {
-                        System.out.print("Come on, only one character is needed, either R or D!\nTry again: ");
-                    }
-                }
-
-                if (displayScores) {
-                    printScoreBoard();
-                }
-
-                // Let players take turns (delegated to TurnLogic)
-                turn.playTurn(playerList.get(player));
-            }
+            playRound();
             // Check maxPoints was reached.
             if (maxPointsReached()) {
                 gameEnd = endGame();
             }
         }
     }
+
+    private void playRound() {
+        //apply rules and assign players to turn for a round
+        for (int player = 0; player < numberOfPlayers; player++) {
+
+            //Get input if the player wants to take his turn (R) or display the scores (D) of all players
+            String r = "R";
+            String d = "D";
+            boolean validInput = false;
+            System.out.println("----------------------------\n");
+            System.out.print("Enter R to play your turn or smack the D to display scores of all players: ");
+            boolean displayScores = false;
+            while (!validInput) {
+                Scanner scan = new Scanner(System.in);
+                String line = scan.nextLine();
+                if (line.length() == 1) { // check that input is only one char
+                    if (line.equals(r) || line.equals(d)) { //check that this char is either R or D
+                        validInput = true;
+                        if (line.equals(d)) {
+                            displayScores = true;
+                        }
+                    }
+                    else {
+                        System.out.print("Is it so hard to enter one of these two upper case letter you twat?!\nTry again, but use your brain: ");
+                    }
+
+                } else {
+                    System.out.print("Come on, only one character is needed, either R or D!\nTry again: ");
+                }
+            }
+
+            if (displayScores) {
+                printScoreBoard();
+            }
+
+            // Let players take turns (delegated to TurnLogic)
+            System.out.println("\n----------------------------\n");
+            System.out.println("It's your turn " + playerList.get(player).getName() + "!\n");
+            turn.playTurn(playerList.get(player));
+        }
+    }
+
+
 
     // Ask for the number of players and validate the input
     private int inputNumberOfPlayers() {
@@ -172,6 +180,5 @@ public class TuttoGame {
             System.out.println(count + ".  " + player.getName() + " has " + player.getPoints() + " points");
             count += 1;
         }
-        System.out.println("\n----------------------------\n");
     }
 }
