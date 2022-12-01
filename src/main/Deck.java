@@ -80,12 +80,12 @@ public class Deck {
     public Card drawCard(){
         if (isEmpty()) {
             shuffle();
-            System.out.println("The deck has been created or reshuffled");
+            System.out.println("You've drawn all 56 cards. The deck has been reshuffled");
         }
         this.index++;
         Card topCard = deck.get(index-1);
         /*display Card name and then return Card*/
-        topCard.display();
+        System.out.println(topCard.display());
         return topCard;
     }
 }
