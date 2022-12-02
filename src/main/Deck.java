@@ -7,7 +7,13 @@ public class Deck {
     private List<Card> deck = new ArrayList<Card>();
     private int index;  // Index where we are at with drawing cards. If index == deck.length(), then the deck is empty.
 
-    public Deck() {
+    //Apply Singleton Design Pattern to create Instance of Deck; because we never initialize a new deck
+    //(use indexing to check if deck is empty), we want to be sure, that we have only one deck in the game
+
+    //make private static initializer, which creates new deck instance -> is thread save
+    private static Deck uniqueDeck = new Deck();
+    //make Constructor Private
+    private Deck() {
         // Instantiate all cards with FLYWEIGHT dp. See: https://refactoring.guru/design-patterns/flyweight maybe use Factory class and other classes
         // Put cards in deck
 
@@ -52,6 +58,12 @@ public class Deck {
 
         shuffle();  // Shuffle deck
     }
+
+    //public method to get (already) created instance of deck
+    public static Deck getDeck() {
+        return uniqueDeck;
+    }
+
 
     public boolean isEmpty(){
         boolean isEmpty = false;
