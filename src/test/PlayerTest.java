@@ -25,12 +25,11 @@ class PlayerTest {
 
     @Test
     void PlayerWrongName() { //not done...
-        String nameInput = "";
+        String nameInput = "\njonny";
         System.setIn(new ByteArrayInputStream(nameInput.getBytes()));
-        String nameInput1 = "Ab";
-        System.setIn(new ByteArrayInputStream(nameInput1.getBytes()));
+
         Player playerTest = new Player(3);
-        assertEquals("Ab", playerTest.getName());
+        assertEquals("jonny", playerTest.getName());
     }
 
     @Test

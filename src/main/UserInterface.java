@@ -13,7 +13,7 @@ public class UserInterface implements UserInputInterface {
                 numPlayer = scan.nextInt();
                 if (numPlayer < 2 || numPlayer > 4) {
                     System.out.println("\n----------------------------\n");
-                    System.out.print("Only two up to 4 plyyers allowed!\n" +
+                    System.out.print("Only two up to 4 players allowed!\n" +
                             "Try again with valid amount of players: ");
                 }
                 else{
@@ -85,6 +85,24 @@ public class UserInterface implements UserInputInterface {
             }
         }
         return displayScores;
+    }
+
+    public String inputName(int playerCount) {
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("Enter username for player " + playerCount + ": ");
+        String playerName = null;
+        boolean validInput = false;
+        while (!validInput) {
+            playerName = myObj.nextLine();  // Read user input
+            if (playerName.length() > 0){
+                validInput = true;
+            }
+            else {
+                System.out.println("Name must be at least on character long, try again: ");
+            }
+        }
+        System.out.println("Username of player "+ playerCount +" is: " + playerName +"\n");  // Output user input
+        return playerName;
     }
 
     @Override

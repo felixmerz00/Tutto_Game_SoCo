@@ -12,6 +12,7 @@ public class Deck {
 
     //make private static initializer, which creates new deck instance -> is thread save
     private static Deck uniqueDeck = new Deck();
+
     //make Constructor Private
     private Deck() {
         // Instantiate all cards with FLYWEIGHT dp. See: https://refactoring.guru/design-patterns/flyweight maybe use Factory class and other classes
@@ -64,13 +65,14 @@ public class Deck {
         return uniqueDeck;
     }
 
-
+    //we check if deck is empty; check index, we do not remove cards from the deck
     public boolean isEmpty(){
         boolean isEmpty = false;
         if (index >= deck.size()) {isEmpty = true;}
         return isEmpty;
     }
 
+    //when deck is initialized or empty, we (re)shuffle it and set the index to 0
     private void shuffle() {
         // reorder all carts random and set index to zero
         int len = deck.size();
@@ -89,6 +91,7 @@ public class Deck {
         index = 0;
     }
 
+    //to draw a card, we return the topCard of the deck and add +1 to the index
     public Card drawCard(){
         if (isEmpty()) {
             shuffle();
