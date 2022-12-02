@@ -11,7 +11,11 @@ public class CloverleafStrategy extends BaseStrategy{
 
     @Override
     public NullTuple executeStrategy(){
-        System.out.println("Cloverleaf strat: ");
+        System.out.println("""
+                Cloverleaf: You have to try to accomplish a “TUTTO” twice in a row on this turn
+                and may not stop before you do. If you roll a null, you don’t score any points. But
+                if you succeed, the game ends immediately, and you win – no matter what score
+                you have!""");
         //first dice game
         Tuple result = super.executeStrategy();
         if(result.success){
