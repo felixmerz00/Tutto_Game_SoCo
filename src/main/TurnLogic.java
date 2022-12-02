@@ -1,7 +1,6 @@
 import cards.Card;
 import cards.Cloverleaf;
 import cards.PlusMinus;
-import dice.DiceCollection;
 import strategy.*;
 
 import java.util.Scanner;
@@ -11,7 +10,7 @@ public class TurnLogic {
     private final Context aContext;
 
     public TurnLogic() {
-        aDeck = new Deck();
+        aDeck =  Deck.getDeck();
         aContext = new Context();
     }
 

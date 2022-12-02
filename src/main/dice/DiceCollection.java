@@ -146,10 +146,25 @@ public class DiceCollection {
         return false;
     }
 
-    public boolean isNull() {
-        return !hasTriplet() && !hasFive() && !hasOne();
+    public boolean isIn(int value){
+        for (Dice aDice: TheDice) {
+            if(aDice.diceResult() == value){
+                return true;
+            }
+        }
+        return false;
     }
+
     public boolean isEmpty(){
         return TheDice.isEmpty();
+    }
+
+    public boolean isNotPutBack(int value){
+        for (Dice aDice: putBackDice) {
+            if(aDice.diceResult() == value){
+                return false;
+            }
+        }
+        return true;
     }
 }
