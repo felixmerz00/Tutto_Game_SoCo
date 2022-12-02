@@ -1,7 +1,5 @@
 package cards;
 
-import strategy.CardStrategyInterface;
-import strategy.CloverleafStrategy;
 import strategy.FireworksStrategy;
 
 public class Fireworks extends Card {
@@ -10,6 +8,6 @@ public class Fireworks extends Card {
 
     public Fireworks(String name) {
         this.cardName = name;
-        this.Strategy = new FireworksStrategy();
+        this.strategy = new FireworksStrategy();
     }
 }

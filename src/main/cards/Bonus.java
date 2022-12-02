@@ -3,7 +3,7 @@ package cards;
 import strategy.*;
 
 public class Bonus extends Card {
-    private int bonusPoints;
+    private final int bonusPoints;
 
     /* check if bonusPoints = 200 or 300 or 400 or 500*/
     /*private boolean validBonusPoints(int bonusPoints) {
@@ -27,19 +27,19 @@ public class Bonus extends Card {
 
         /*create instance of CardStrategy corresponding to this.bonusPoints*/
         if (this.bonusPoints == 200) {
-            this.Strategy = new BonusStrategy200();
+            this.strategy = new BonusStrategy200();
         }
         else if (this.bonusPoints == 300) {
-            this.Strategy = new BonusStrategy300();
+            this.strategy = new BonusStrategy300();
         }
         else if (this.bonusPoints == 400) {
-            this.Strategy = new BonusStrategy400();
+            this.strategy = new BonusStrategy400();
         }
         else if (this.bonusPoints == 500) {
-            this.Strategy = new BonusStrategy500();
+            this.strategy = new BonusStrategy500();
         }
         else if (this.bonusPoints == 600) {
-            this.Strategy = new BonusStrategy600();
+            this.strategy = new BonusStrategy600();
         }
     }
     @Override

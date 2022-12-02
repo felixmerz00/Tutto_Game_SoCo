@@ -1,13 +1,12 @@
 package cards;
 
 import strategy.CardStrategyInterface;
-import strategy.Tuple;
 
 public abstract class Card {
-    public String cardName;
+    protected String cardName;
 
     /*not sure that we can define CardStrategyInterface as Type*/
-    protected CardStrategyInterface Strategy;
+    protected CardStrategyInterface strategy;
 
     /*constructor deleted, maybe add again -> conflicts with Bonus Card, cannot override a constructor
     public Card(String name) {
@@ -19,6 +18,6 @@ public abstract class Card {
     }
 
     public CardStrategyInterface getStrategy() {
-        return Strategy;
+        return strategy;
     }
 }

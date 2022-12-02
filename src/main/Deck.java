@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Deck {
-    private List<Card> deck = new ArrayList<Card>();
+    private final List<Card> deck = new ArrayList<>();
     private int index;  // Index where we are at with drawing cards. If index == deck.length(), then the deck is empty.
 
     //Apply Singleton Design Pattern to create Instance of Deck; because we never initialize a new deck
     //(use indexing to check if deck is empty), we want to be sure, that we have only one deck in the game
 
     //make private static initializer, which creates new deck instance -> is thread save
-    private static Deck uniqueDeck = new Deck();
+    private final static Deck uniqueDeck = new Deck();
 
     //make Constructor Private
     private Deck() {
@@ -66,10 +66,8 @@ public class Deck {
     }
 
     //we check if deck is empty; check index, we do not remove cards from the deck
-    public boolean isEmpty(){
-        boolean isEmpty = false;
-        if (index >= deck.size()) {isEmpty = true;}
-        return isEmpty;
+    private boolean isEmpty(){
+        return index >= deck.size();
     }
 
     //when deck is initialized or empty, we (re)shuffle it and set the index to 0
