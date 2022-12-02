@@ -162,5 +162,22 @@ class DeckTest {
     }
 
     @Test
-    void testDrawCard(){}
+    void testDrawCard(){
+    }
+
+    //check if Deck.shuffle works
+    @Test
+    void testShuffle() {
+        List<Card> copyDeck = new ArrayList<>();
+        for (int i=0; i<56; i++) {
+            copyDeck.add(deck.drawCard());
+        }
+        int cntSameCards = 0;
+        for (int i=0; i<56; i++) {
+            Card copyCard = copyDeck.get(i);
+            Card shuffledDeckCard = deck.drawCard();
+            if (copyCard == shuffledDeckCard) {cntSameCards++;}
+        }
+        assertNotEquals(56, cntSameCards);
+    }
 }

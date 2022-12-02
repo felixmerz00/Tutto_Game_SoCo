@@ -45,15 +45,15 @@ public class Deck {
 
         /*Instantiate 5 Bonus Cards (200, 300, 400, 500, 600) and put 5 References each*/
         for (int i=0; i<5; i++) {
-            Bonus bonus200 = (Bonus) DeckFactory.getBonusCards(200);
+            Bonus bonus200 = DeckFactory.getBonusCards(200);
             deck.add(bonus200);
-            Bonus bonus300 = (Bonus) DeckFactory.getBonusCards(300);
+            Bonus bonus300 = DeckFactory.getBonusCards(300);
             deck.add(bonus300);
-            Bonus bonus400 = (Bonus) DeckFactory.getBonusCards(400);
+            Bonus bonus400 = DeckFactory.getBonusCards(400);
             deck.add(bonus400);
-            Bonus bonus500 = (Bonus) DeckFactory.getBonusCards(500);
+            Bonus bonus500 = DeckFactory.getBonusCards(500);
             deck.add(bonus500);
-            Bonus bonus600 = (Bonus) DeckFactory.getBonusCards(600);
+            Bonus bonus600 = DeckFactory.getBonusCards(600);
             deck.add(bonus600);
         }
 
