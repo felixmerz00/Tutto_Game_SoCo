@@ -47,6 +47,14 @@ class TurnLogicTest {
         assertTrue(playerWantsToContinuePlaying());
     }
 
+    /* This class test a wrong input.*/
+    @Test
+    void playerWantsToContinue3(){
+        String input = "Hallo\n0";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        assertFalse(playerWantsToContinuePlaying());
+    }
+
     // Helper method to make the UUT accessible (see chapter 5.7)
     private boolean playerWantsToContinuePlaying(){
         try{
