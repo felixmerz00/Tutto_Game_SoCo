@@ -1,7 +1,5 @@
 package strategy;
 
-//import dice.DiceCollection;
-
 public class StraightStrategy extends BaseStrategy{
     //cant stop, new rule for is valid
 
@@ -12,14 +10,26 @@ public class StraightStrategy extends BaseStrategy{
 
     @Override
     protected boolean isValid(int Number, boolean triplet){
-        return false;//!aDiceCollection.hasIn(Number);
+        return aDiceCollection.isNotPutBack(Number) && aDiceCollection.isIn(Number);
     }
 
-    //mmh geht besser
-    /*public boolean isNull(DiceCollection aDiceCollection){
+    //if every number in theDice already is in putBackDice then its not valid
+    @Override
+    protected boolean isNull(){
         //wenn alle würfel in theDice auch in putBackDice sind.
-        return false;
-    }*/
+        for (int i = 1; i <=6; i++) {
+            if(aDiceCollection.isIn(i) && aDiceCollection.isNotPutBack(i)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //straightStrat doesn't use triplets
+    @Override
+    protected boolean isTriplet(int Number){
+        return  false;
+    }
 
     @Override
     public NullTuple executeStrategy() {
@@ -31,4 +41,5 @@ public class StraightStrategy extends BaseStrategy{
 
         return result;
     }
+
 }

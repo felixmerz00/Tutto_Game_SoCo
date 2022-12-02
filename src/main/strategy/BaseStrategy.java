@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public abstract class BaseStrategy implements CardStrategyInterface{
-    private DiceCollection aDiceCollection;
+    protected DiceCollection aDiceCollection;
 
     //input validation for all strategies the same?
     //@PRE: triplet is a boolean and number an int between 1-6
@@ -32,6 +32,25 @@ public abstract class BaseStrategy implements CardStrategyInterface{
         return input.nextLine();
     }
 
+    protected boolean isNull() {
+        return !aDiceCollection.hasTriplet() && !aDiceCollection.hasFive() && !aDiceCollection.hasOne();
+    }
+
+    protected boolean isTriplet(int Number){
+        boolean triplet = false;
+        Scanner scanInput = new Scanner(System.in);
+        if(aDiceCollection.hasTriplet(Number)) {
+            if (Number == 5 || Number == 1) {
+                System.out.println("As triplet? (Boolean)");
+                //triplet has to be boolean
+                triplet = scanInput.nextBoolean();
+            }
+            //numbers that are not 1 and 5 can only be put back when they are triplets
+            else triplet = true;
+        }
+        return triplet;
+    }
+
     @Override
     public NullTuple executeStrategy() {
         aDiceCollection = new DiceCollection();
@@ -52,7 +71,7 @@ public abstract class BaseStrategy implements CardStrategyInterface{
             aDiceCollection.printDiceCollection();
 
             //check if null --> end strategy
-            if(aDiceCollection.isNull()){
+            if(isNull()){
                 System.out.println(("You rolled Null and your turn ended. "));
                 result.Null = true;
                 result.points = aDiceCollection.getPoints();
@@ -61,8 +80,9 @@ public abstract class BaseStrategy implements CardStrategyInterface{
             }
             //set putBackAnother to default value after you rolled again after you didnt want to put back a die
             putBackAnother = true;
+
             //put dices back til no dice can be put back.
-            while(!aDiceCollection.isNull() && putBackAnother) {
+            while(!isNull() && putBackAnother) {
 
 
                 //loop input
@@ -78,7 +98,8 @@ public abstract class BaseStrategy implements CardStrategyInterface{
                     Number = scanInput.nextInt();
 
                     //is it a triplet?
-                    if(aDiceCollection.hasTriplet(Number)) {
+                    triplet = isTriplet(Number);
+                  /*  if(aDiceCollection.hasTriplet(Number)) {
                         if (Number == 5 || Number == 1) {
                             System.out.println("As triplet? (Boolean)");
                             //triplet has to be boolean
@@ -86,7 +107,7 @@ public abstract class BaseStrategy implements CardStrategyInterface{
                         }
                         //numbers that are not 1 and 5 can only be put back when they are triplets
                         else triplet = true;
-                    }
+                    }*/
 
                     //check for valid input & if the dices can be put aside
                     validInput = isValid(Number, triplet);
@@ -108,7 +129,7 @@ public abstract class BaseStrategy implements CardStrategyInterface{
                 }
 
                 //Ask if player wants to put back another Die
-                if(!aDiceCollection.isNull()){
+                if(!isNull()){
                     putBackAnother = putAnotherDiceBack();
                 }
             }
@@ -141,7 +162,7 @@ public abstract class BaseStrategy implements CardStrategyInterface{
             }
         }
         //you only get to this point when you rolled a null
-        assert aDiceCollection.isNull();
+        assert isNull();
         result.points = aDiceCollection.getPoints();
         result.Null = true;
         result.success = false;
