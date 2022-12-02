@@ -68,6 +68,8 @@ public class TurnLogic {
                 }else{
                     System.out.print("Your input was invalid. Please try again.");
                 }
+            }else{
+                scan.nextLine();
             }
         }
     }
