@@ -44,6 +44,8 @@ public class TurnLogic {
                 }
                 // If the player achieved Tutto with any other card, ask player if he wants to continue playing
                 turnUnfinished = playerWantsToContinuePlaying();
+            }else{
+                turnUnfinished = false;
             }
         }
         // Add scored points from this turn to the players total points
