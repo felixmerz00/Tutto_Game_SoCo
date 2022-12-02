@@ -47,10 +47,18 @@ class TurnLogicTest {
         assertTrue(playerWantsToContinuePlaying());
     }
 
-    /* This class test a wrong input.*/
+    /* Test a wrong input type.*/
     @Test
     void playerWantsToContinue3(){
         String input = "Hallo\n0";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        assertFalse(playerWantsToContinuePlaying());
+    }
+
+    /* Test wrong value for integer. */
+    @Test
+    void playerWantsToContinue4(){
+        String input = "2\n0";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         assertFalse(playerWantsToContinuePlaying());
     }
