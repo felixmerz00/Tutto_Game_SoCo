@@ -1,7 +1,6 @@
 import cards.Card;
 import cards.Cloverleaf;
 import cards.PlusMinus;
-import dice.DiceCollection;
 import strategy.*;
 
 import java.util.Scanner;
