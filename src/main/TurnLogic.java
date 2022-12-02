@@ -10,7 +10,7 @@ public class TurnLogic {
     private final Context aContext;
 
     public TurnLogic() {
-        aDeck = new Deck();
+        aDeck =  Deck.getDeck();
         aContext = new Context();
     }
 
