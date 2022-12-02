@@ -1,6 +1,9 @@
+import cards.Card;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import strategy.CardStrategyInterface;
+import strategy.Tuple;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -13,6 +16,26 @@ class TurnLogicTest {
     // I need this variable for the helper method of the playerWantsToContinue test method.
     TurnLogic aTurnLogic = new TurnLogic();
     private InputStream sysInBackup;
+
+    /*
+    static class StubCard extends Card {
+        public String cardName = "StubCard";
+
+        public String display(){return cardName;}
+
+        public CardStrategyInterface getStrategy(){
+            CardStrategyInterface StubCardStrategy;
+            return StubCardStrategy;
+        }
+    }
+
+    static class StubCardStrategy implements CardStrategyInterface{
+
+        @Override
+        public Tuple executeStrategy() {
+            return new Tuple(0, false);
+        }
+    } */
 
     @BeforeEach
     void setUp() {
@@ -27,6 +50,11 @@ class TurnLogicTest {
 
     @Test
     void playTurn() {
+        String input = "Player Name\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Player testPlayer = new Player(0);
+        aTurnLogic.playTurn(testPlayer);
+
     }
 
     /* Test if the method TurnLogic.playerWantsToContinuePlaying returns false if the
