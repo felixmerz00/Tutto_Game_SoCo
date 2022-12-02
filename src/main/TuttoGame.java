@@ -68,12 +68,12 @@ public class TuttoGame {
             int finishCondition;
             finishCondition = turn.playTurn(playerList.get(player));
 
-            if (finishCondition == 2){ // Player achievs 2 tuttos in a row and instantly wins
+            if (finishCondition == 2){ // Player achieves 2 tutto in a row and instantly wins
                 playerList.get(player).updatePoints(maxPoints-playerList.get(player).getPoints()+1000000); //make a more clever solution
                 break;
             }
 
-            if (finishCondition == 1){ //Player successful with plusMinus -> best player gets deducted 1000points
+            if (finishCondition == 1){ //Player successful with plusMinus --> the best player gets deducted 1000points
                 int bestPlayerPoints = 0;
                 for (int idx = 0; idx < numberOfPlayers; idx++) {
                     if (playerList.get(idx).getPoints() > bestPlayerPoints){
@@ -110,7 +110,7 @@ public class TuttoGame {
     private boolean maxPointsReached(){
         boolean maxPointsReached = false;
         for (Player player: playerList){
-            if (player.getPoints() > maxPoints) {
+            if (player.getPoints() >= maxPoints) {
                 maxPointsReached = true;
                 break;
             }

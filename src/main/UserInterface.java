@@ -87,23 +87,6 @@ public class UserInterface implements UserInputInterface {
         return displayScores;
     }
 
-    public String inputName(int playerCount) {
-        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Enter username for player " + playerCount + ": ");
-        String playerName = null;
-        boolean validInput = false;
-        while (!validInput) {
-            playerName = myObj.nextLine();  // Read user input
-            if (playerName.length() > 0){
-                validInput = true;
-            }
-            else {
-                System.out.println("Name must be at least on character long, try again: ");
-            }
-        }
-        System.out.println("Username of player "+ playerCount +" is: " + playerName +"\n");  // Output user input
-        return playerName;
-    }
 
     @Override
     public void printScoreBoard(ArrayList<Player> playerList){ //move to UI class and pass tuttogame to be able to acess playerlis?
@@ -118,14 +101,14 @@ public class UserInterface implements UserInputInterface {
     }
 
     @Override
-    public void userOutputWinByPoints(String winner) {
+    public void userOutputWinByDoubleTutto(String winner) {
         System.out.println("\n" +
                 "████████╗██╗░░░██╗████████╗████████╗░█████╗░\n" +
                 "╚══██╔══╝██║░░░██║╚══██╔══╝╚══██╔══╝██╔══██╗\n" +
                 "░░░██║░░░██║░░░██║░░░██║░░░░░░██║░░░██║░░██║\n" +
                 "░░░██║░░░██║░░░██║░░░██║░░░░░░██║░░░██║░░██║\n" +
                 "░░░██║░░░╚██████╔╝░░░██║░░░░░░██║░░░╚█████╔╝\n" +
-                "   Player "+ winner +" winns with a double tutto\n" +
+                "   Player "+ winner +" wins with a double tutto\n" +
                 "████████╗██╗░░░██╗████████╗████████╗░█████╗░\n" +
                 "╚══██╔══╝██║░░░██║╚══██╔══╝╚══██╔══╝██╔══██╗\n" +
                 "░░░██║░░░██║░░░██║░░░██║░░░░░░██║░░░██║░░██║\n" +
@@ -134,7 +117,7 @@ public class UserInterface implements UserInputInterface {
     }
 
     @Override
-    public void userOutputWinByDoubleTutto(String winner) {
+    public void userOutputWinByPoints(String winner) {
         System.out.println("\n" +
                 "░██╗░░░░░░░██╗██╗███╗░░██╗███╗░░██╗███████╗██████╗░\n" +
                 "░██║░░██╗░░██║██║████╗░██║████╗░██║██╔════╝██╔══██╗\n" +

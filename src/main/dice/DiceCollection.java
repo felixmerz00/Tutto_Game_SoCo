@@ -34,7 +34,7 @@ public class DiceCollection {
 
         int tripletIndex = 0;
 
-        for(int i = 0;i < remainingDice && tripletIndex <= 3; i++){ //if player wants to put a way a drilling but rolled more than 3 of the same
+        for(int i = 0;i < remainingDice && tripletIndex < 3; i++){ //if player wants to put a way a drilling but rolled more than 3 of the same
             Dice aDice = TheDice.get(i);
             if(aDice.diceResult() == Number){
                 //found a die with number, one fewer die can be used

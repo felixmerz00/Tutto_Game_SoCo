@@ -23,6 +23,10 @@ public abstract class BaseStrategy implements CardStrategyInterface{
     protected Boolean putAnotherDiceBack(){
         Scanner input = new Scanner(System.in);
         System.out.println("Do you want to put another die back? (Boolean)");
+        while(!input.hasNextBoolean()){
+            System.out.println("This is not a boolean! Enter true or false.");
+            input.next();
+        }
         return input.nextBoolean();
     }
 
@@ -91,23 +95,17 @@ public abstract class BaseStrategy implements CardStrategyInterface{
 
                     //putDiceBack(); as extra function?
                     //say which dices you want to put away the dices
-                    System.out.println("Which Die do you like to put back? " +
-                            "An int for the pips (e.g. 5)");
+                    System.out.println("Which Die do you like to put back? An int for the pips (e.g. 5)");
 
                     //Number has to be an int between 1-6
-                    Number = scanInput.nextInt();
+                    while(!scanInput.hasNextInt()){
+                        System.out.println("This is not a Number!");
+                        System.out.println("Which Die do you like to put back? An int for the pips (e.g. 5)");
+                        scanInput.next();
+                    }
 
-                    //is it a triplet?
+                    Number = scanInput.nextInt();
                     triplet = isTriplet(Number);
-                  /*  if(aDiceCollection.hasTriplet(Number)) {
-                        if (Number == 5 || Number == 1) {
-                            System.out.println("As triplet? (Boolean)");
-                            //triplet has to be boolean
-                            triplet = scanInput.nextBoolean();
-                        }
-                        //numbers that are not 1 and 5 can only be put back when they are triplets
-                        else triplet = true;
-                    }*/
 
                     //check for valid input & if the dices can be put aside
                     validInput = isValid(Number, triplet);
