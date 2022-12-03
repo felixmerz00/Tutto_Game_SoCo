@@ -1,4 +1,5 @@
 import cards.Card;
+import cards.Cloverleaf;
 import cards.PlusMinus;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -104,6 +105,30 @@ class TurnLogicTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         assertEquals(1, aTurnLogic.playTurn(testPlayer));
         assertEquals(1000, testPlayer.getPoints());
+    }
+
+    // Test branch where player rolls Tutto the Cloverleaf card.
+    @Test
+    void playTurn5() throws NoSuchFieldException, IllegalAccessException {
+        String input = "Olaf\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Player testPlayer = new Player(0);
+
+        // Replace the deck in the TurnLogic with a StubDeck
+        Field deckField = TurnLogic.class.getDeclaredField("aDeck");
+        deckField.setAccessible(true);
+        StubDeck5 deck = new StubDeck5();
+        deckField.set(aTurnLogic, deck);
+
+        Field strategyField = Card.class.getDeclaredField("strategy");
+        strategyField.setAccessible(true);
+        StubCardStrategy4 aStubStrategy = new StubCardStrategy4();
+        strategyField.set(deck.aCard, aStubStrategy);
+
+        input = "0";    // In this branch the code will ask the user for input, so I must provide the input.
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        assertEquals(2, aTurnLogic.playTurn(testPlayer));
+        assertEquals(0, testPlayer.getPoints());    // For the Cloverleaf card, players points should not be updated in the TurnLogic class.
     }
 
     /* Test if the method TurnLogic.playerWantsToContinuePlaying returns false if the
@@ -234,6 +259,13 @@ class TurnLogicTest {
         @Override
         public Tuple executeStrategy() {
             return new Tuple(1, true);
+        }
+    }
+
+    static class StubDeck5 implements DeckInterface{
+        public Card aCard = new Cloverleaf("Cloverleaf");
+        public Card drawCard(){
+            return aCard;
         }
     }
 }
