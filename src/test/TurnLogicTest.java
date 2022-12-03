@@ -156,8 +156,7 @@ class TurnLogicTest {
     * */
     static class StubDeck1 implements DeckInterface{
         public Card drawCard(){
-            StubCard1 aStubCard = new StubCard1();
-            return aStubCard;
+            return new StubCard1();
         }
     }
     static class StubCard1 extends Card {
@@ -166,8 +165,7 @@ class TurnLogicTest {
         public String display(){return cardName;}
 
         public CardStrategyInterface getStrategy(){
-            CardStrategyInterface StubCardStrategy = new StubCardStrategy1();
-            return StubCardStrategy;
+            return new StubCardStrategy1();
         }
     }
 
@@ -181,8 +179,7 @@ class TurnLogicTest {
 
     static class StubDeck2 implements DeckInterface{
         public Card drawCard(){
-            StubCard2 aStubCard = new StubCard2();
-            return aStubCard;
+            return new StubCard2();
         }
     }
 
@@ -192,8 +189,7 @@ class TurnLogicTest {
         public String display(){return cardName;}
 
         public CardStrategyInterface getStrategy(){
-            CardStrategyInterface StubCardStrategy = new StubCardStrategy2();
-            return StubCardStrategy;
+            return new StubCardStrategy2();
         }
     }
 
@@ -206,8 +202,7 @@ class TurnLogicTest {
 
     static class StubDeck3 implements DeckInterface{
         public Card drawCard(){
-            StubCard3 aStubCard = new StubCard3();
-            return aStubCard;
+            return new StubCard3();
         }
     }
 
@@ -217,8 +212,7 @@ class TurnLogicTest {
         public String display(){return cardName;}
 
         public CardStrategyInterface getStrategy(){
-            CardStrategyInterface StubCardStrategy = new StubCardStrategy3();
-            return StubCardStrategy;
+            return new StubCardStrategy3();
         }
     }
 
