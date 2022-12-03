@@ -14,11 +14,8 @@ import java.lang.reflect.Method;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TurnLogicTest {
-    // I need this variable for the helper method of the playerWantsToContinue test method.
     TurnLogic aTurnLogic = new TurnLogic();
     private InputStream sysInBackup;
-
-
 
     @BeforeEach
     void setUp() {
@@ -58,6 +55,24 @@ class TurnLogicTest {
         deckField.setAccessible(true);
         StubDeck2 deck = new StubDeck2();
         deckField.set(aTurnLogic, deck);
+        aTurnLogic.playTurn(testPlayer);
+
+        assertEquals(1, testPlayer.getPoints());
+    }
+
+    // Test branch where player rolls Tutto
+    @Test
+    void playTurn3() throws NoSuchFieldException, IllegalAccessException {
+        String input = "Olaf\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Player testPlayer = new Player(0);
+
+        Field deckField = TurnLogic.class.getDeclaredField("aDeck");
+        deckField.setAccessible(true);
+        StubDeck3 deck = new StubDeck3();
+        deckField.set(aTurnLogic, deck);
+        input = "0";    // In this branch the code will ask the user for input, so I must provide the input.
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
         aTurnLogic.playTurn(testPlayer);
 
         assertEquals(1, testPlayer.getPoints());
@@ -158,6 +173,31 @@ class TurnLogicTest {
         @Override
         public Tuple executeStrategy() {
             return new Tuple(1, false);
+        }
+    }
+
+    static class StubDeck3 implements DeckInterface{
+        public Card drawCard(){
+            StubCard3 aStubCard = new StubCard3();
+            return aStubCard;
+        }
+    }
+
+    static class StubCard3 extends Card {
+        public String cardName = "StubCard";
+
+        public String display(){return cardName;}
+
+        public CardStrategyInterface getStrategy(){
+            CardStrategyInterface StubCardStrategy = new StubCardStrategy3();
+            return StubCardStrategy;
+        }
+    }
+
+    static class StubCardStrategy3 implements CardStrategyInterface{
+        @Override
+        public Tuple executeStrategy() {
+            return new Tuple(1, true);
         }
     }
 }
