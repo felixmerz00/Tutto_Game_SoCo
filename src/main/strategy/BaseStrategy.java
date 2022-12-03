@@ -7,14 +7,8 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public abstract class BaseStrategy implements CardStrategyInterface{
-    protected DiceCollectionInterface aDiceCollection;
 
-    public BaseStrategy(){
-        this.aDiceCollection = new DiceCollection();
-    }
-    public BaseStrategy(DiceCollectionInterface aDiceCollectionInterface){
-        this.aDiceCollection = aDiceCollectionInterface;
-    }
+    protected DiceCollectionInterface aDiceCollection = new DiceCollection();
 
     //input validation for all strategies the same?
     //@PRE: triplet is a boolean and number an int between 1-6
@@ -65,7 +59,7 @@ public abstract class BaseStrategy implements CardStrategyInterface{
 
     @Override
     public NullTuple executeStrategy() {
-        aDiceCollection = new DiceCollection();
+        //aDiceCollection = new DiceCollection();
         NullTuple result = new NullTuple(0,false);
         boolean validInput;
         boolean rollAgain = false;
@@ -88,6 +82,7 @@ public abstract class BaseStrategy implements CardStrategyInterface{
                 result.Null = true;
                 result.points = aDiceCollection.getPoints();
                 result.success = false;
+                aDiceCollection.reset();
                 return result;
             }
             //set putBackAnother to default value after you rolled again after you didnt want to put back a die
@@ -131,6 +126,7 @@ public abstract class BaseStrategy implements CardStrategyInterface{
                     System.out.println("You did a Tutto!"); // put this in the diceCollection?
                     result.points = aDiceCollection.getPoints();
                     result.success = true;
+                    aDiceCollection.reset();
                     return result;
                 }
 
@@ -163,6 +159,7 @@ public abstract class BaseStrategy implements CardStrategyInterface{
                     System.out.println("Your turn is over.");
                     result.points = aDiceCollection.getPoints();
                     result.success = false;
+                    aDiceCollection.reset();
                     return result;
                 }
             }
@@ -172,6 +169,7 @@ public abstract class BaseStrategy implements CardStrategyInterface{
         result.points = aDiceCollection.getPoints();
         result.Null = true;
         result.success = false;
+        aDiceCollection.reset();
         return result;
     }
 }

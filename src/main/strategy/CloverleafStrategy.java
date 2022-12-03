@@ -1,17 +1,7 @@
 package strategy;
 
-import dice.DiceCollection;
-import dice.DiceCollectionInterface;
-
 public class CloverleafStrategy extends BaseStrategy{
 //Has to play dice till 2 tuttos, when reached wins the game, else nothing happens
-
-    public CloverleafStrategy(){
-        this.aDiceCollection = new DiceCollection();
-    }
-    public CloverleafStrategy(DiceCollectionInterface aDiceCollectionInterface){
-        this.aDiceCollection = aDiceCollectionInterface;
-    }
 
     // cant stop rolling the dice
     @Override
@@ -31,6 +21,7 @@ public class CloverleafStrategy extends BaseStrategy{
         if(result.success){
             System.out.println("One Tutto to go! ");
             //second dice game
+            aDiceCollection.reset();
             Tuple result1 = super.executeStrategy();
             if(result1.success){
                 System.out.println("Congrats, you got the second Tutto! ");

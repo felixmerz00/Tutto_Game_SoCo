@@ -1,16 +1,7 @@
 package strategy;
 
-import dice.DiceCollection;
-import dice.DiceCollectionInterface;
-
 public class PlusMinusStrategy extends BaseStrategy{
     //cant stop rolling, if tutto, then 1000 points, else 0
-    public PlusMinusStrategy(){
-        this.aDiceCollection = new DiceCollection();
-    }
-    public PlusMinusStrategy(DiceCollectionInterface aDiceCollectionInterface){
-        this.aDiceCollection = aDiceCollectionInterface;
-    }
 
     @Override
     protected String rollAgain(){

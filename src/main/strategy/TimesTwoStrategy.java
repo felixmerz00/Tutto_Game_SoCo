@@ -1,16 +1,7 @@
 package strategy;
 
-import dice.DiceCollection;
-import dice.DiceCollectionInterface;
-
 public class TimesTwoStrategy extends BaseStrategy{
     //if tutto double points, if null 0 points, if player ended turn then he gets the points
-    public TimesTwoStrategy(){
-        this.aDiceCollection = new DiceCollection();
-    }
-    public TimesTwoStrategy(DiceCollectionInterface aDiceCollectionInterface){
-        this.aDiceCollection = aDiceCollectionInterface;
-    }
 
     @Override
     public NullTuple executeStrategy() {

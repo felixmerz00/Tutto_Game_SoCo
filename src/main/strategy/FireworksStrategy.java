@@ -1,16 +1,6 @@
 package strategy;
 
-import dice.DiceCollection;
-import dice.DiceCollectionInterface;
-
 public class FireworksStrategy extends BaseStrategy{
-
-    public FireworksStrategy(){
-        this.aDiceCollection = new DiceCollection();
-    }
-    public FireworksStrategy(DiceCollectionInterface aDiceCollectionInterface){
-        this.aDiceCollection = aDiceCollectionInterface;
-    }
 
     //roll till null, put back all dice available
     @Override

@@ -1,16 +1,7 @@
 package strategy;
 
-import dice.DiceCollection;
-import dice.DiceCollectionInterface;
-
 public class StraightStrategy extends BaseStrategy{
     //cant stop, new rule for is valid
-    public StraightStrategy(){
-        this.aDiceCollection = new DiceCollection();
-    }
-    public StraightStrategy(DiceCollectionInterface aDiceCollectionInterface){
-        this.aDiceCollection = aDiceCollectionInterface;
-    }
 
     @Override
     protected String rollAgain(){
