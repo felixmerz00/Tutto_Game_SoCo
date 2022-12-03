@@ -4,20 +4,19 @@ import java.util.ArrayList;
 
 public class DiceCollection implements DiceCollectionInterface{
     //create 6 dices
-    private final ArrayList<Dice> TheDice = new ArrayList<>();
-    private final ArrayList<Dice> putBackDice = new ArrayList<>();
+    private ArrayList<Dice> TheDice = new ArrayList<>();
+    private ArrayList<Dice> putBackDice = new ArrayList<>();
 
-    private int points = 0;
+    protected int points = 0;
 
     //store correct amount of dices
-    private int remainingDice = 6;
+    protected int remainingDice = 6;
 
     public DiceCollection() {
         for(int i = 0; i < 6; i++){ //6 because else we could call the constructor and create a diceCollection with remainingDice != 6
             Dice aDice = new Dice();
             TheDice.add(aDice);
         }
-        //System.out.println(TheDice);
     }
 
     //roll remainingDices
@@ -166,5 +165,15 @@ public class DiceCollection implements DiceCollectionInterface{
             }
         }
         return true;
+    }
+
+    public void reset(){
+        remainingDice = 6;
+        TheDice.removeAll(TheDice);
+        for(int i = 0; i < 6; i++){ //6 because else we could call the constructor and create a diceCollection with remainingDice != 6
+            Dice aDice = new Dice();
+            TheDice.add(aDice);
+        }
+        putBackDice.removeAll(putBackDice);
     }
 }

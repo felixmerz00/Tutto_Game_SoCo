@@ -3,13 +3,7 @@ package dice;
 import java.util.ArrayList;
 
 public interface DiceCollectionInterface {
-      ArrayList<Dice> TheDice = new ArrayList<>();
-      ArrayList<Dice> putBackDice = new ArrayList<>();
-
-     int points = 0;
-
-    //store correct amount of dices
-     int remainingDice = 6;
+    ArrayList<Dice> TheDice = new ArrayList<>();
 
     void rollDices();
 
@@ -33,4 +27,6 @@ public interface DiceCollectionInterface {
     boolean isEmpty();
 
     boolean isNotPutBack(int value);
+
+    void reset();
 }
