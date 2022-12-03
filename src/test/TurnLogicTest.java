@@ -19,31 +19,6 @@ class TurnLogicTest {
     private InputStream sysInBackup;
 
 
-    static class StubCard extends Card {
-        public String cardName = "StubCard";
-
-        public String display(){return cardName;}
-
-        public CardStrategyInterface getStrategy(){
-            CardStrategyInterface StubCardStrategy = new StubCardStrategy();
-            return StubCardStrategy;
-        }
-    }
-
-    static class StubCardStrategy implements CardStrategyInterface{
-
-        @Override
-        public Tuple executeStrategy() {
-            return new Tuple(0, false);
-        }
-    }
-
-    static class StubDeck implements DeckInterface{
-        public Card drawCard(){
-            StubCard aStubCard = new StubCard();
-            return aStubCard;
-        }
-    }
 
     @BeforeEach
     void setUp() {
@@ -56,19 +31,36 @@ class TurnLogicTest {
         System.setIn(sysInBackup);
     }
 
+    // Test branch where player rolls a null
     @Test
-    void playTurn() throws NoSuchFieldException, IllegalAccessException {
-        String input = "Player Name\n";
+    void playTurn1() throws NoSuchFieldException, IllegalAccessException {
+        String input = "Olaf\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Player testPlayer = new Player(0);
 
         Field deckField = TurnLogic.class.getDeclaredField("aDeck");
         deckField.setAccessible(true);
-        StubDeck deck = new StubDeck();
+        StubDeck1 deck = new StubDeck1();
         deckField.set(aTurnLogic, deck);
         aTurnLogic.playTurn(testPlayer);
 
         assertEquals(0, testPlayer.getPoints());
+    }
+
+    // Test branch where player does roll neither a null nor a Tutto
+    @Test
+    void playTurn2() throws NoSuchFieldException, IllegalAccessException {
+        String input = "Olaf\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Player testPlayer = new Player(0);
+
+        Field deckField = TurnLogic.class.getDeclaredField("aDeck");
+        deckField.setAccessible(true);
+        StubDeck2 deck = new StubDeck2();
+        deckField.set(aTurnLogic, deck);
+        aTurnLogic.playTurn(testPlayer);
+
+        assertEquals(1, testPlayer.getPoints());
     }
 
     /* Test if the method TurnLogic.playerWantsToContinuePlaying returns false if the
@@ -113,6 +105,59 @@ class TurnLogicTest {
             return (boolean) method.invoke(aTurnLogic);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    /*
+    * In the following code a number of stub classes are defined which I use to test the TurnLogic class.
+    * */
+    static class StubDeck1 implements DeckInterface{
+        public Card drawCard(){
+            StubCard1 aStubCard = new StubCard1();
+            return aStubCard;
+        }
+    }
+    static class StubCard1 extends Card {
+        public String cardName = "StubCard";
+
+        public String display(){return cardName;}
+
+        public CardStrategyInterface getStrategy(){
+            CardStrategyInterface StubCardStrategy = new StubCardStrategy1();
+            return StubCardStrategy;
+        }
+    }
+
+    static class StubCardStrategy1 implements CardStrategyInterface{
+
+        @Override
+        public Tuple executeStrategy() {
+            return new Tuple(0, false);
+        }
+    }
+
+    static class StubDeck2 implements DeckInterface{
+        public Card drawCard(){
+            StubCard2 aStubCard = new StubCard2();
+            return aStubCard;
+        }
+    }
+
+    static class StubCard2 extends Card {
+        public String cardName = "StubCard";
+
+        public String display(){return cardName;}
+
+        public CardStrategyInterface getStrategy(){
+            CardStrategyInterface StubCardStrategy = new StubCardStrategy2();
+            return StubCardStrategy;
+        }
+    }
+
+    static class StubCardStrategy2 implements CardStrategyInterface{
+        @Override
+        public Tuple executeStrategy() {
+            return new Tuple(1, false);
         }
     }
 }
