@@ -7,6 +7,7 @@ import strategy.Tuple;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -17,14 +18,14 @@ class TurnLogicTest {
     TurnLogic aTurnLogic = new TurnLogic();
     private InputStream sysInBackup;
 
-    /*
+
     static class StubCard extends Card {
         public String cardName = "StubCard";
 
         public String display(){return cardName;}
 
         public CardStrategyInterface getStrategy(){
-            CardStrategyInterface StubCardStrategy;
+            CardStrategyInterface StubCardStrategy = new StubCardStrategy();
             return StubCardStrategy;
         }
     }
@@ -35,7 +36,14 @@ class TurnLogicTest {
         public Tuple executeStrategy() {
             return new Tuple(0, false);
         }
-    } */
+    }
+
+    static class StubDeck implements DeckInterface{
+        public Card drawCard(){
+            StubCard aStubCard = new StubCard();
+            return aStubCard;
+        }
+    }
 
     @BeforeEach
     void setUp() {
@@ -49,12 +57,18 @@ class TurnLogicTest {
     }
 
     @Test
-    void playTurn() {
+    void playTurn() throws NoSuchFieldException, IllegalAccessException {
         String input = "Player Name\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Player testPlayer = new Player(0);
+
+        Field deckField = TurnLogic.class.getDeclaredField("aDeck");
+        deckField.setAccessible(true);
+        StubDeck deck = new StubDeck();
+        deckField.set(aTurnLogic, deck);
         aTurnLogic.playTurn(testPlayer);
 
+        assertEquals(0, testPlayer.getPoints());
     }
 
     /* Test if the method TurnLogic.playerWantsToContinuePlaying returns false if the

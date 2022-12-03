@@ -3,7 +3,7 @@ import cards.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Deck {
+public class Deck implements DeckInterface {
     private final List<Card> deck = new ArrayList<>();
     private int index;  // Index where we are at with drawing cards. If index == deck.length(), then the deck is empty.
 

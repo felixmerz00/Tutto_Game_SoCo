@@ -6,7 +6,7 @@ import strategy.*;
 import java.util.Scanner;
 
 public class TurnLogic {
-    private final Deck aDeck;
+    private DeckInterface aDeck;
     private final Context aContext;
 
     public TurnLogic() {
