@@ -2,7 +2,7 @@ package dice;
 
 import java.util.ArrayList;
 
-public class DiceCollection {
+public class DiceCollection implements DiceCollectionInterface{
     //create 6 dices
     private final ArrayList<Dice> TheDice = new ArrayList<>();
     private final ArrayList<Dice> putBackDice = new ArrayList<>();
@@ -30,7 +30,7 @@ public class DiceCollection {
     //@PRE: DiceCollection has enough Dices left
     //      Number is int from 1,...,6
     //      Boolean triplet is true if and only if aDiceCollection has a triplet
-    public void putDiceAway(int Number, Boolean triplet){
+    public void putDiceAway(int Number, boolean triplet){
 
         int tripletIndex = 0;
 
