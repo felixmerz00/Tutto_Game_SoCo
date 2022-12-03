@@ -1,12 +1,20 @@
 package strategy;
 
 import dice.DiceCollection;
+import dice.DiceCollectionInterface;
 
 import java.util.Objects;
 import java.util.Scanner;
 
 public abstract class BaseStrategy implements CardStrategyInterface{
-    protected DiceCollection aDiceCollection;
+    protected DiceCollectionInterface aDiceCollection;
+
+    public BaseStrategy(){
+        this.aDiceCollection = new DiceCollection();
+    }
+    public BaseStrategy(DiceCollectionInterface aDiceCollectionInterface){
+        this.aDiceCollection = aDiceCollectionInterface;
+    }
 
     //input validation for all strategies the same?
     //@PRE: triplet is a boolean and number an int between 1-6

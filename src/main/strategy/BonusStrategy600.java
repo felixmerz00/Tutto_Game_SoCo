@@ -1,8 +1,18 @@
 package strategy;
 
+import dice.DiceCollection;
+import dice.DiceCollectionInterface;
+
 public class BonusStrategy600 extends BonusStrategy{
 
     //consider create abstract class with individual bonuses as subclasses (BONUS IF TIME LEFT)
+    public BonusStrategy600(){
+        this.aDiceCollection = new DiceCollection();
+    }
+    public BonusStrategy600(DiceCollectionInterface aDiceCollectionInterface){
+        this.aDiceCollection = aDiceCollectionInterface;
+    }
+
     @Override
     public NullTuple executeStrategy() {
         System.out.println("""
