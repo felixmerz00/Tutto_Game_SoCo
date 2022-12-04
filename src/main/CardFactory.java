@@ -2,7 +2,7 @@ import cards.*;
 
 import java.util.HashMap;
 
-public class DeckFactory {
+public class CardFactory {
     private static final HashMap deckMap = new HashMap();
 
     public static Card getCards(String name) {
@@ -11,7 +11,7 @@ public class DeckFactory {
             Card card = (Card) deckMap.get(name);
 
             if (card == null) {
-                card = new Cloverleaf(name);
+                card = new Cloverleaf("Cloverleaf");
                 deckMap.put(name, card);
             }
             return card;

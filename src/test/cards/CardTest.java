@@ -7,7 +7,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class CardTest {
 
     @Test
-    void display() {
+    void testDisplayCloverleaf() {
+        Card cloverleaf = new Cloverleaf("Cloverleaf");
+
     }
 
     @Test
