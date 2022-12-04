@@ -4,8 +4,8 @@ import strategy.TimesTwoStrategy;
 
 public class TimesTwo extends Card{
     /*Constructor creates instance of TimesTwoStrategy*/
-    public TimesTwo(String name) {
-        this.cardName = name;
+    public TimesTwo() {
+        this.cardName = "x2";
         this.strategy = new TimesTwoStrategy();
     }
 }

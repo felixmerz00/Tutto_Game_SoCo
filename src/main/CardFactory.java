@@ -11,7 +11,7 @@ public class CardFactory {
             Card card = (Card) deckMap.get(name);
 
             if (card == null) {
-                card = new Cloverleaf("Cloverleaf");
+                card = new Cloverleaf();
                 deckMap.put(name, card);
             }
             return card;
@@ -21,7 +21,7 @@ public class CardFactory {
             Card card = (Card) deckMap.get(name);
 
             if (card == null) {
-                card = new Fireworks(name);
+                card = new Fireworks();
                 deckMap.put(name, card);
             }
             return card;
@@ -31,7 +31,7 @@ public class CardFactory {
             Card card = (Card) deckMap.get(name);
 
             if (card == null) {
-                card = new PlusMinus(name);
+                card = new PlusMinus();
                 deckMap.put(name, card);
             }
             return card;
@@ -41,7 +41,7 @@ public class CardFactory {
             Card card = (Card) deckMap.get(name);
 
             if (card == null) {
-                card = new Straight(name);
+                card = new Straight();
                 deckMap.put(name, card);
             }
             return card;
@@ -51,7 +51,7 @@ public class CardFactory {
             Card card = (Card) deckMap.get(name);
 
             if (card == null) {
-                card = new TimesTwo(name);
+                card = new TimesTwo();
                 deckMap.put(name, card);
             }
             return card;
@@ -61,7 +61,7 @@ public class CardFactory {
         Card card = (Card) deckMap.get(name);
 
         if (card == null) {
-            card = new Stop(name);
+            card = new Stop();
             deckMap.put(name, card);
         }
         return card;
@@ -71,7 +71,7 @@ public class CardFactory {
         Card card = (Card) deckMap.get(bonusPoints);
 
         if (card == null) {
-            card = new Bonus("Bonus", bonusPoints);
+            card = new Bonus(bonusPoints);
             deckMap.put(bonusPoints, card);
         }
         return (Bonus) card;

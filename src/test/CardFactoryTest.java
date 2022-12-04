@@ -10,7 +10,7 @@ class CardFactoryTest {
     void testGetCards() {
         Cloverleaf cloverleaf1 = (Cloverleaf) CardFactory.getCards("Cloverleaf");
         Cloverleaf cloverleaf2 = (Cloverleaf) CardFactory.getCards("Cloverleaf");
-        Cloverleaf cloverleaf3 = new Cloverleaf("Cloverleaf");
+        Cloverleaf cloverleaf3 = new Cloverleaf();
         assertSame(cloverleaf1, cloverleaf2);
         assertNotSame(cloverleaf1, cloverleaf3);
         assertNotSame(cloverleaf2, cloverleaf3);
@@ -30,11 +30,11 @@ class CardFactoryTest {
         Bonus bonus600_2 = CardFactory.getBonusCards(600);
         Bonus bonus600_3 = CardFactory.getBonusCards(600);
 
-        Bonus bonus600 = new Bonus("Bonus", 600);
-        Bonus bonus500 = new Bonus("Bonus", 500);
-        Bonus bonus400 = new Bonus("Bonus", 400);
-        Bonus bonus300 = new Bonus("Bonus", 300);
-        Bonus bonus200 = new Bonus("Bonus", 200);
+        Bonus bonus600 = new Bonus(600);
+        Bonus bonus500 = new Bonus( 500);
+        Bonus bonus400 = new Bonus(400);
+        Bonus bonus300 = new Bonus(300);
+        Bonus bonus200 = new Bonus(200);
 
         assertSame(bonus200_1, bonus200_2);
         assertSame(bonus300_1, bonus300_2);

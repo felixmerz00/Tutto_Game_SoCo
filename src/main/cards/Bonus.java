@@ -16,8 +16,8 @@ public class Bonus extends Card {
 
     /*not sure if check is needed for implementation... review when deck implementation is done*/
 
-    public Bonus(String name, int bonusPoints) {
-        this.cardName = name;
+    public Bonus(int bonusPoints) {
+        this.cardName = "Bonus";
         this.bonusPoints = bonusPoints;
         /*if (validBonusPoints(bonusPoints)) {
             this.bonusPoints = bonusPoints;
