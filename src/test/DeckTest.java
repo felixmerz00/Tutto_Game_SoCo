@@ -1,8 +1,11 @@
 import cards.*;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,20 +29,36 @@ class DeckTest {
     //method to use in Tests where we check if correct amount of cards are in deck
     private List<Card> getList(String name) {
         //create 7 List; one for each type of cards
-        List<Card> cloList = new ArrayList<>();
+        /*List<Card> cloList = new ArrayList<>();
         List<Card> fwList = new ArrayList<>();
         List<Card> sList = new ArrayList<>();
         List<Card> strList = new ArrayList<>();
         List<Card> pmList = new ArrayList<>();
         List<Card> x2List = new ArrayList<>();
-        List<Card> bonList = new ArrayList<>();
+        List<Card> bonList = new ArrayList<>();*/
+
+        Map<String, List<Card>> cardDict = new HashMap<>();
 
         //map -> then for loop map(topCard.display).add(topCard)
         //return map(name)
 
         for (int i=0; i<56; i++) {
             Card topCard = deck.drawCard();
-            if (topCard.display().equals("Cloverleaf")) {cloList.add(topCard);}
+            String topCardName; topCard.display();
+            //since Bonus Cards display with their bonusPoints we need if else statement to set topCardName
+            if (topCard.display().startsWith("Bonus")) {topCardName = "Bonus";}
+            else {topCardName = topCard.display();}
+            //check if topCard Key is already in dictList
+            //if not in dictList, create new ArrayList and add it under Key topCardName
+            if (cardDict.get(topCardName) == null) {
+                List<Card> dictList = new ArrayList<>();
+                dictList.add(topCard);
+                cardDict.put(topCardName, dictList);}
+
+            //if topCardName already as Key in dictList, add topCard to its Arraylist
+            else {cardDict.get(topCardName).add(topCard);}
+        }
+            /*if (topCard.display().equals("Cloverleaf")) {cloList.add(topCard);}
             if (topCard.display().equals("Fireworks")) {fwList.add(topCard);}
             if (topCard.display().equals("Stop")) {sList.add(topCard);}
             if (topCard.display().equals("Straight")) {strList.add(topCard);}
@@ -47,10 +66,11 @@ class DeckTest {
             if (topCard.display().equals("x2")) {x2List.add(topCard);}
             if (topCard.display().equals("Bonus (200)") || topCard.display().equals("Bonus (300)") || topCard.display().equals("Bonus (400)") ||
                     topCard.display().equals("Bonus (500)") || topCard.display().equals("Bonus (600)")) {
-                bonList.add(topCard);}
-        }
+                bonList.add(topCard);}*/
+        return cardDict.get(name);
 
-        return switch (name) {
+
+        /*return switch (name) {
             case "Cloverleaf" -> cloList;
             case "Fireworks" -> fwList;
             case "Stop" -> sList;
@@ -58,10 +78,8 @@ class DeckTest {
             case "PlusMinus" -> pmList;
             case "x2" -> x2List;
             case "Bonus" -> bonList;
-            default -> null;
-        };
+            def*/
     }
-
 
 
 
@@ -159,13 +177,53 @@ class DeckTest {
         assertEquals(5, cnt600);
     }
 
-    //no test needed for isEmpty method; is tested in Tests above
+    //even if Deck.isEmpty method is indirectly tested by other Test Methods in TestDeck,
+    //we make a test for isEmpty function to test it in isolation
+
+    //we create helper method using metaprogramming, so we can bypass the access restriction of private keyword in Deck.isEmpty method
+    private boolean isEmpty() {
+        try {
+            Method method = Deck.class.getDeclaredMethod("isEmpty");
+            method.setAccessible(true);
+            return (boolean) method.invoke(deck);
+
+        } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
     @Test
-    void isEmpty() {
+    void testIsEmpty() {
+        try {
+            Field index = Deck.class.getDeclaredField("index");
+            index.setAccessible(true);
+            index.set(deck, 56);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+        //with index set to 56 isEmpty should now return true
+        assertTrue(isEmpty());
+        //when drawing a new card, the deck is reshuffled and index is set to 0, so isEmpty should return false
+        deck.drawCard();
+        assertFalse(isEmpty());
     }
 
+    //because the implementation of class Deck is a realization of FLYWEIGHT and its constructor is private,
+    //we use metaprogramming to get around the pattern and create a duplicate of deck
+
     @Test
-    void testDrawCard(){
+    void testDrawCard() {
+        try {
+            Constructor<Deck> constructor = Deck.class.getDeclaredConstructor();
+            constructor.setAccessible(true);
+
+            Deck deck1 = constructor.newInstance();
+            //we can now test, if deck1.drawCard returns the topCard
+            System.out.println(deck1);
+
+        } catch (InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     //check if Deck.shuffle works

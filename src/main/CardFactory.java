@@ -57,14 +57,16 @@ public class CardFactory {
             return card;
         }
         /*when passed name is Stop, instantiate Stop Card*/
+        else if (name.equals("Stop")) {
+            Card card = (Card) deckMap.get(name);
 
-        Card card = (Card) deckMap.get(name);
-
-        if (card == null) {
-            card = new Stop();
-            deckMap.put(name, card);
+            if (card == null) {
+                card = new Stop();
+                deckMap.put(name, card);
+            }
+            return card;
         }
-        return card;
+        return null;
     }
 
     public static Bonus getBonusCards(Integer bonusPoints) {
