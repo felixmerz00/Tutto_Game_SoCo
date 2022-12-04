@@ -35,10 +35,34 @@ class BonusTest {
     }
 
     @Test
-    void testDisplay() {
+    void testDisplay200() {
         Bonus testBonus = new Bonus( 200);
         String output = testBonus.display();
         assertEquals("Bonus (200)", output);
+    }
+    @Test
+    void testDisplay300() {
+        Bonus testBonus = new Bonus( 300);
+        String output = testBonus.display();
+        assertEquals("Bonus (300)", output);
+    }
+    @Test
+    void testDisplay400() {
+        Bonus testBonus = new Bonus( 400);
+        String output = testBonus.display();
+        assertEquals("Bonus (400)", output);
+    }
+    @Test
+    void testDisplay500() {
+        Bonus testBonus = new Bonus( 500);
+        String output = testBonus.display();
+        assertEquals("Bonus (500)", output);
+    }
+    @Test
+    void testDisplay600() {
+        Bonus testBonus = new Bonus( 600);
+        String output = testBonus.display();
+        assertEquals("Bonus (600)", output);
     }
 
     /*@Test
