@@ -6,67 +6,77 @@ public class UserInterface implements UserInputInterface {
     public int userInputNumberOfPlayers(){
         System.out.println("Please enter the amount of player (min: 2, max: 4): "); // Ask user about input
         boolean validInput = false;
-        int numPlayer = 0;
+        int intValue = 0;
+        Scanner scan = new Scanner(System.in);  // Create a Scanner object
+
+        // ask for new input until valid one appears
         while (!validInput) {
-            Scanner scan = new Scanner(System.in);  // Create a Scanner object
-            if (scan.hasNextInt()) {
-                numPlayer = scan.nextInt();
-                if (numPlayer < 2 || numPlayer > 4) {
-                    System.out.println("\n----------------------------\n");
-                    System.out.print("Only two up to 4 players allowed!\n" +
+            String input = scan.nextLine();
+
+            //check that input is of type int
+            try {
+                intValue = Integer.parseInt(input);
+
+                // check that int lies between 2 and 4
+                if (intValue < 2 || intValue > 4) {
+                    System.out.println("Only 2 up to 4 players allowed!\n" +
                             "Try again with valid amount of players: ");
-                }
-                else{
+                } else {
                     validInput = true;
+
+                }
+            }catch(NumberFormatException e){
+                    System.out.println("Input must be an integer! \nTry again:");
                 }
             }
-            else{
-                System.out.println("\n----------------------------\n");
-                System.out.print("Input must be an integer and between 2 and 4?\nTry again:");
-            }
 
-        }
         System.out.println("\n----------------------------\n");
-        System.out.println("Game with " + numPlayer + " players initiated, have fun!");  // Output user input
+        System.out.println("Game with " + intValue + " players initiated, have fun!");  // Output user input
         System.out.println("\n----------------------------\n");
 
-        return numPlayer;
+        return intValue;
     }
 
     public int userInputMaxPoints(){
-        System.out.println("Please enter the winning points: "); // Ask user about input
+        System.out.println("Please enter the winning points between 5000 and 10000: "); // Ask user about input
         boolean validInput = false;
-        int winningPoints = 0;
-        while (!validInput) {
-            Scanner scan = new Scanner(System.in);  // Create a Scanner object
-            if (scan.hasNextInt()) {
-                winningPoints = scan.nextInt();
-                if (winningPoints < 5000 || winningPoints > 10000) {
-                    System.out.println("Input must be between 5000 and 10000! Please enter new number: ");
-                }
-                else{
-                    validInput = true;
-                }
-            }
-            else{
-                System.out.println("Don't be silly, you know that a winning number must be an integer.\nTry again but make an effort:");
-            }
+        int intValue = 0;
+        Scanner scan = new Scanner(System.in);  // Create a Scanner object
 
+        // ask for new input until valid one appears
+        while (!validInput) {
+            String input = scan.nextLine();
+
+            //check that input is of type int
+            try {
+                intValue = Integer.parseInt(input);
+
+                // check that int lies between 2 and 4
+                if (intValue < 5000 || intValue > 10000) {
+                    System.out.println("Input must be between 5000 and 10000!\nPlease enter new number: ");
+                } else {
+                    validInput = true;
+
+                }
+            }catch(NumberFormatException e){
+                System.out.println("Input must be an integer between 5000 and 10000! \nTry again:");
+            }
         }
+
         System.out.println("\n----------------------------\n");
-        System.out.println("First player to reach " + winningPoints + " points will be the winner!");  // Output user input
+        System.out.println("First player to reach " + intValue + " points will be the winner!");  // Output user input
         System.out.println("\n----------------------------\n");
-        return winningPoints;
+        return intValue;
     }
 
-    public boolean userInputChooseTurnPoints() {
+    public boolean userInputDisplayPoints() {
         String r = "R";
         String d = "D";
         boolean validInput = false;
         System.out.print("press R to roll dices\npress D to display scores\n");
         boolean displayScores = false;
+        Scanner scan = new Scanner(System.in);
         while (!validInput) {
-            Scanner scan = new Scanner(System.in);
             String line = scan.nextLine();
             if (line.length() == 1) { // check that input is only one char
                 if (line.equals(r) || line.equals(d)) { //check that this char is either R or D
@@ -76,12 +86,12 @@ public class UserInterface implements UserInputInterface {
                     }
                 }
                 else {
-                    System.out.print("Is it so hard to enter one of these two upper case letter you twat?!\n" +
-                            "Try again, but use your brain: ");
+                    System.out.println("Just enter one upper case letter (either D or R)!\n" +
+                            "Try again: ");
                 }
             }
             else {
-                System.out.print("Come on, only one character is needed, either R or D!\nTry again: ");
+                System.out.println("Input must be one character long (either D or R)!\nTry again: ");
             }
         }
         return displayScores;

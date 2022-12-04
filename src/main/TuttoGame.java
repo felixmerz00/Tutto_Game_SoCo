@@ -13,6 +13,8 @@ public class TuttoGame {
     private static TurnLogic turn;
 
     public static void main(String[] args){
+        System.out.println("Have fun playing Tutto!");
+        System.out.println("\n----------------------------\n");
 
         TuttoGame aGame = new TuttoGame();
         aGame.playGame();
@@ -39,6 +41,8 @@ public class TuttoGame {
 
 
     public void playGame() { //copy this into TuttoGame
+
+
         boolean gameEnd = false;
         while (!gameEnd) {
             playRound();
@@ -58,7 +62,7 @@ public class TuttoGame {
             System.out.println("It's your turn " + playerList.get(player).getName() + "!\n");
 
             //Get input if the player wants to take his turn (R) or display the scores (D) of all players
-            boolean displayScores = userInteraction.userInputChooseTurnPoints();
+            boolean displayScores = userInteraction.userInputDisplayPoints();
 
             if (displayScores) {
                 userInteraction.printScoreBoard(playerList);

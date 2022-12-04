@@ -6,8 +6,7 @@ public interface UserInputInterface {
 
     int userInputMaxPoints();
 
-    boolean userInputChooseTurnPoints();
-
+    boolean userInputDisplayPoints();
 
     void printScoreBoard(ArrayList<Player> playerList);
 
