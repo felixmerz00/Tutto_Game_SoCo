@@ -8,8 +8,8 @@ public class FireworksStrategy extends BaseStrategy{
         return true;
     }
     @Override
-    protected String rollAgain(){
-        return "R";
+    protected boolean rollAgain(){
+        return true;
     }
 
 

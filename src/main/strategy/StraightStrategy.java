@@ -4,8 +4,8 @@ public class StraightStrategy extends BaseStrategy{
     //cant stop, new rule for is valid
 
     @Override
-    protected String rollAgain(){
-        return "R";
+    protected boolean rollAgain(){
+        return true;
     }
 
     @Override

@@ -5,8 +5,8 @@ public class CloverleafStrategy extends BaseStrategy{
 
     // cant stop rolling the dice
     @Override
-    protected String rollAgain(){
-        return "R";
+    protected boolean rollAgain(){
+        return true;
     }
 
     @Override

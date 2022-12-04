@@ -33,10 +33,28 @@ public abstract class BaseStrategy implements CardStrategyInterface{
         return input.nextBoolean();
     }
 
-    protected String rollAgain(){
+    protected boolean rollAgain(){
         Scanner input = new Scanner(System.in);
-        System.out.println("Do you want to roll again? R for roll again, E for End turn");
-        return input.nextLine();
+        String rollAgainString;
+        boolean validInput = false;
+        boolean rollAgain = false;
+        while(!validInput) {
+
+            System.out.println("Do you want to roll again? R for roll again, E for End turn");
+            rollAgainString = input.nextLine();
+
+            if (Objects.equals(rollAgainString, "R")) {
+                rollAgain = true;
+                validInput = true;
+            } else if (Objects.equals(rollAgainString, "E")) {
+                //rollAgain = false;
+                validInput = true;
+            } else {
+                System.out.println("Invalid input: R for roll again, E for end turn.");
+            }
+        }
+        return rollAgain;
+
     }
 
     protected boolean isNull() {
@@ -58,17 +76,15 @@ public abstract class BaseStrategy implements CardStrategyInterface{
         return triplet;
     }
 
-    protected boolean putBackDice(){
+    protected void putBackDice(){
         Scanner scanInput = new Scanner(System.in);
         int Number = 0;
         boolean triplet = false;
-        boolean putBackAnother = false;
 
         //loop input
         boolean validInput = false;
         while (!validInput) {
 
-            //putDiceBack(); as extra function?
             //say which dices you want to put away the dices
             System.out.println("Which Die do you like to put back? An int for the pips (e.g. 5)");
 
@@ -90,22 +106,13 @@ public abstract class BaseStrategy implements CardStrategyInterface{
         }
         //if so, put them aside
         aDiceCollection.putDiceAway(Number, triplet);
-
-        //Ask if player wants to put back another Die
-        if(!isNull()){
-            putBackAnother = putAnotherDiceBack();
-        }
-        return putBackAnother;
     }
 
     @Override
     public NullTuple executeStrategy() {
-        //aDiceCollection = new DiceCollection();
         NullTuple result = new NullTuple(0,false);
-        boolean validInput;
-        boolean rollAgain = false;
+        boolean rollAgain;
         boolean putBackAnother;
-        String rollAgainString;
 
         while(!aDiceCollection.isEmpty()){
 
@@ -128,90 +135,32 @@ public abstract class BaseStrategy implements CardStrategyInterface{
 
             //put dices back til no dice can be put back.
             while(!isNull() && putBackAnother) {
-                putBackAnother = putBackDice();
-
-                //check if tutto
-                //if tutto is reached, Strategy is over
-                if(aDiceCollection.isTutto()){
-                    System.out.println("You did a Tutto!"); // put this in the diceCollection?
-                    result.points = aDiceCollection.getPoints();
-                    result.success = true;
-                    aDiceCollection.reset();
-                    return result;
-                }
-/*
-                //loop input
-                validInput = false;
-                while (!validInput) {
-
-                    //putDiceBack(); as extra function?
-                    //say which dices you want to put away the dices
-                    System.out.println("Which Die do you like to put back? An int for the pips (e.g. 5)");
-
-                    //Number has to be an int between 1-6
-                    while(!scanInput.hasNextInt()){
-                        System.out.println("This is not a Number!");
-                        System.out.println("Which Die do you like to put back? An int for the pips (e.g. 5)");
-                        scanInput.next();
-                    }
-
-                    Number = scanInput.nextInt();
-                    triplet = isTriplet(Number);
-
-                    //check for valid input & if the dices can be put aside
-                    validInput = isValid(Number, triplet);
-                    if (!validInput) {
-                        System.out.println("Your input is not valid, try again. ");
-                    }
-                }
-                //if so, put them aside
-                aDiceCollection.putDiceAway(Number, triplet);
-                triplet = false;
-
-                //check if tutto
-                //if tutto is reached, Strategy is over
-                if(aDiceCollection.isTutto()){
-                    System.out.println("You did a Tutto!"); // put this in the diceCollection?
-                    result.points = aDiceCollection.getPoints();
-                    result.success = true;
-                    aDiceCollection.reset();
-                    return result;
-                }
-
-                //Ask if player wants to put back another Die
+                putBackDice();
                 if(!isNull()){
                     putBackAnother = putAnotherDiceBack();
-                }*/
-            }
-
-
-            // ask user if he wants to roll again. --> input validation
-            validInput = false;
-            while(!validInput){
-
-                rollAgainString = rollAgain();
-
-                if(Objects.equals(rollAgainString, "R")){
-                    rollAgain = true;
-                    validInput = true;
                 }
-                else if(Objects.equals(rollAgainString, "E")){
-                    rollAgain = false;
-                    validInput = true;
-                }
-                else{
-                    System.out.println("Invalid input: R for roll again, E for end turn.");
-                }
-                //player wants to stop
-                //validInput equals false per default
-                if(!rollAgain && validInput) {
-                    System.out.println("Your turn is over.");
+
+                //check if tutto
+                //if tutto is reached, Strategy is over
+                if (aDiceCollection.isTutto()) {
+                    System.out.println("You did a Tutto!"); // put this in the diceCollection?
                     result.points = aDiceCollection.getPoints();
-                    result.success = false;
+                    result.success = true;
                     aDiceCollection.reset();
                     return result;
                 }
             }
+
+            // ask user if he wants to roll again. --> input validation
+            rollAgain = rollAgain();
+            if(!rollAgain) {
+                System.out.println("Your turn is over.");
+                result.points = aDiceCollection.getPoints();
+                result.success = false;
+                aDiceCollection.reset();
+                return result;
+            }
+
         }
         //you only get to this point when you rolled a null
         assert isNull();
