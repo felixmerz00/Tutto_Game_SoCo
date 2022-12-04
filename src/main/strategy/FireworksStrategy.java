@@ -4,12 +4,12 @@ public class FireworksStrategy extends BaseStrategy{
 
     //roll till null, put back all dice available
     @Override
-    protected Boolean putAnotherDiceBack(){
+    protected boolean putAnotherDiceBack(){
         return true;
     }
     @Override
-    protected String rollAgain(){
-        return "R";
+    protected boolean rollAgain(){
+        return true;
     }
 
 

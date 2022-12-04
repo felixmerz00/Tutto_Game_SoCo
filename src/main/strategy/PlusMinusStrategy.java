@@ -4,8 +4,8 @@ public class PlusMinusStrategy extends BaseStrategy{
     //cant stop rolling, if tutto, then 1000 points, else 0
 
     @Override
-    protected String rollAgain(){
-        return "R";
+    protected boolean rollAgain(){
+        return true;
     }
 
     @Override
