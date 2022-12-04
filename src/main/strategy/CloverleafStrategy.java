@@ -2,13 +2,9 @@ package strategy;
 
 public class CloverleafStrategy extends BaseStrategy{
 //Has to play dice till 2 tuttos, when reached wins the game, else nothing happens
-
-    // cant stop rolling the dice
-    @Override
-    protected boolean rollAgain(){
-        return true;
+    public CloverleafStrategy(){
+        this.UserInterface = new CloverleafStrategyUI();
     }
-
     @Override
     public NullTuple executeStrategy(){
         System.out.println("""
@@ -31,4 +27,5 @@ public class CloverleafStrategy extends BaseStrategy{
         }
         else return  new NullTuple(0,false);
     }
+
 }

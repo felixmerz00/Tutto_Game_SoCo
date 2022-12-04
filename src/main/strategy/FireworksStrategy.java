@@ -2,16 +2,9 @@ package strategy;
 
 public class FireworksStrategy extends BaseStrategy{
 
-    //roll till null, put back all dice available
-    @Override
-    protected boolean putAnotherDiceBack(){
-        return true;
+    public FireworksStrategy(){
+        this.UserInterface = new FireworksStrategyUI();
     }
-    @Override
-    protected boolean rollAgain(){
-        return true;
-    }
-
 
     @Override
     public NullTuple executeStrategy() {

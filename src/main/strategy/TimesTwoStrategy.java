@@ -2,6 +2,9 @@ package strategy;
 
 public class TimesTwoStrategy extends BaseStrategy{
     //if tutto double points, if null 0 points, if player ended turn then he gets the points
+    public TimesTwoStrategy(){
+        this.UserInterface = new StrategyUI();
+    }
 
     @Override
     public NullTuple executeStrategy() {

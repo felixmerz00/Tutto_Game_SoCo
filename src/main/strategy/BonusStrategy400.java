@@ -2,6 +2,9 @@ package strategy;
 
 public class BonusStrategy400 extends BonusStrategy{
 
+    public BonusStrategy400(){
+        this.UserInterface = new StrategyUI();
+    }
     @Override
     public NullTuple executeStrategy() {
         System.out.println("""

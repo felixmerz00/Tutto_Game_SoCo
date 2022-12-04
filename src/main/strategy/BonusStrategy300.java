@@ -3,6 +3,9 @@ package strategy;
 public class BonusStrategy300 extends BonusStrategy{
 
     //consider create abstract class with individual bonuses as subclasses (BONUS IF TIME LEFT)
+    public BonusStrategy300(){
+        this.UserInterface = new StrategyUI();
+    }
 
     @Override
     public NullTuple executeStrategy() {

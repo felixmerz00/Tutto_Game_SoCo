@@ -2,12 +2,9 @@ package strategy;
 
 public class PlusMinusStrategy extends BaseStrategy{
     //cant stop rolling, if tutto, then 1000 points, else 0
-
-    @Override
-    protected boolean rollAgain(){
-        return true;
+    public PlusMinusStrategy(){
+        this.UserInterface = new PlusMinusStrategyUI();
     }
-
     @Override
     public NullTuple executeStrategy() {
         System.out.println("""
