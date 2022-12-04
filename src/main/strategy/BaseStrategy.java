@@ -9,6 +9,7 @@ import java.util.Scanner;
 public abstract class BaseStrategy implements CardStrategyInterface{
 
     protected DiceCollectionInterface aDiceCollection = new DiceCollection();
+    //protected StrategyUI UserInterface = new StrategyUI();
 
     //input validation for all strategies the same?
     //@PRE: triplet is a boolean and number an int between 1-6
@@ -22,7 +23,7 @@ public abstract class BaseStrategy implements CardStrategyInterface{
         }
         else return aDiceCollection.hasTriplet(Number);
     }
-    protected Boolean putAnotherDiceBack(){
+    protected boolean putAnotherDiceBack(){
         Scanner input = new Scanner(System.in);
         System.out.println("Do you want to put another die back? (Boolean)");
         while(!input.hasNextBoolean()){
@@ -57,6 +58,46 @@ public abstract class BaseStrategy implements CardStrategyInterface{
         return triplet;
     }
 
+    protected boolean putBackDice(){
+        Scanner scanInput = new Scanner(System.in);
+        int Number = 0;
+        boolean triplet = false;
+        boolean putBackAnother = false;
+
+        //loop input
+        boolean validInput = false;
+        while (!validInput) {
+
+            //putDiceBack(); as extra function?
+            //say which dices you want to put away the dices
+            System.out.println("Which Die do you like to put back? An int for the pips (e.g. 5)");
+
+            //Number has to be an int between 1-6
+            while(!scanInput.hasNextInt()){
+                System.out.println("This is not a Number!");
+                System.out.println("Which Die do you like to put back? An int for the pips (e.g. 5)");
+                scanInput.next();
+            }
+
+            Number = scanInput.nextInt();
+            triplet = isTriplet(Number);
+
+            //check for valid input & if the dices can be put aside
+            validInput = isValid(Number, triplet);
+            if (!validInput) {
+                System.out.println("Your input is not valid, try again. ");
+            }
+        }
+        //if so, put them aside
+        aDiceCollection.putDiceAway(Number, triplet);
+
+        //Ask if player wants to put back another Die
+        if(!isNull()){
+            putBackAnother = putAnotherDiceBack();
+        }
+        return putBackAnother;
+    }
+
     @Override
     public NullTuple executeStrategy() {
         //aDiceCollection = new DiceCollection();
@@ -65,9 +106,6 @@ public abstract class BaseStrategy implements CardStrategyInterface{
         boolean rollAgain = false;
         boolean putBackAnother;
         String rollAgainString;
-        int Number = 0;
-        boolean triplet = false;
-        Scanner scanInput = new Scanner(System.in);
 
         while(!aDiceCollection.isEmpty()){
 
@@ -90,8 +128,18 @@ public abstract class BaseStrategy implements CardStrategyInterface{
 
             //put dices back til no dice can be put back.
             while(!isNull() && putBackAnother) {
+                putBackAnother = putBackDice();
 
-
+                //check if tutto
+                //if tutto is reached, Strategy is over
+                if(aDiceCollection.isTutto()){
+                    System.out.println("You did a Tutto!"); // put this in the diceCollection?
+                    result.points = aDiceCollection.getPoints();
+                    result.success = true;
+                    aDiceCollection.reset();
+                    return result;
+                }
+/*
                 //loop input
                 validInput = false;
                 while (!validInput) {
@@ -133,8 +181,9 @@ public abstract class BaseStrategy implements CardStrategyInterface{
                 //Ask if player wants to put back another Die
                 if(!isNull()){
                     putBackAnother = putAnotherDiceBack();
-                }
+                }*/
             }
+
 
             // ask user if he wants to roll again. --> input validation
             validInput = false;
