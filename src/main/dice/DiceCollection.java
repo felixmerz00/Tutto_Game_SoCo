@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class DiceCollection implements DiceCollectionInterface{
     //create 6 dices
-    private ArrayList<Dice> TheDice = new ArrayList<>();
-    private ArrayList<Dice> putBackDice = new ArrayList<>();
+    protected ArrayList<Dice> TheDice = new ArrayList<>();
+    protected ArrayList<Dice> putBackDice = new ArrayList<>();
 
     protected int points = 0;
 
@@ -169,11 +169,11 @@ public class DiceCollection implements DiceCollectionInterface{
 
     public void reset(){
         remainingDice = 6;
-        TheDice.removeAll(TheDice);
+        TheDice.clear();
         for(int i = 0; i < 6; i++){ //6 because else we could call the constructor and create a diceCollection with remainingDice != 6
             Dice aDice = new Dice();
             TheDice.add(aDice);
         }
-        putBackDice.removeAll(putBackDice);
+        putBackDice.clear();
     }
 }

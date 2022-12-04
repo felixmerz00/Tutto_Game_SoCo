@@ -5,31 +5,19 @@ import java.util.ArrayList;
 
 public class MockDiceCollectionFactory {
 
-    //reRoll values?
-    public static DiceCollection MockDiceCollectionCreate(int[] values) throws NoSuchFieldException, IllegalAccessException{
-        DiceCollectionInterface tDiceCollection = new DiceCollection();
+    //reSet values?
+    public static DiceCollectionInterface mockDiceCollectionCreate(int[] values) throws NoSuchFieldException, IllegalAccessException{
+        //DiceCollectionInterface tDiceCollection = new DiceCollection();
 
         ArrayList<Dice> Dice = new ArrayList<>();
         //create the dices & put dice with values in ArrayList
         for(int a: values){
             Dice.add(setEyes(a));
         }
-
-        //set theDice from DiceCollection as the created arraylist
-        Field DiceAccess = DiceCollection.class.getDeclaredField("TheDice");
+        DiceCollectionInterface aMockDiceCollection = new MockDiceCollection();
+        Field DiceAccess = MockDiceCollection.class.getSuperclass().getDeclaredField("TheDice") ;
         DiceAccess.setAccessible(true);
-        DiceAccess.set(tDiceCollection, Dice);
-
-        //create MockDiceCollection
-        MockDiceCollection aMockDiceCollection = new MockDiceCollection();
-
-        //set refill Values to new refill in MockDiceCollection
-
-        //set the MockDiceCollection as the created DiceCollection
-        Field DiceCollectionField = MockDiceCollection.class.getSuperclass().getDeclaredField("TheDice") ;
-        DiceCollectionField.setAccessible(true);
-        DiceCollectionField.set(aMockDiceCollection, tDiceCollection.TheDice);
-        //put dices in ArrayList
+        DiceAccess.set(aMockDiceCollection, Dice);
 
         return aMockDiceCollection;
     }
@@ -41,4 +29,5 @@ public class MockDiceCollectionFactory {
         eyes.set(aDice, value);
         return aDice;
     }
+
 }

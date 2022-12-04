@@ -1,7 +1,7 @@
 package dice;
 import java.util.Random;
 
-public class Dice implements DiceInterface {
+public class Dice{
     //individual dice objects
 
     private int eyes;
