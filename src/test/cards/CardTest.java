@@ -6,8 +6,7 @@ class CardTest {
 
     @Test
     void testDisplayCloverleaf() {
-        //Card cloverleaf = new Cloverleaf();
-
+        Card cloverleaf = new Cloverleaf();
     }
 
     @Test

@@ -212,18 +212,11 @@ class DeckTest {
 
     @Test
     void testDrawCard() {
-        try {
-            Constructor<Deck> constructor = Deck.class.getDeclaredConstructor();
-            constructor.setAccessible(true);
-
-            Deck deck1 = constructor.newInstance();
-            //we can now test, if deck1.drawCard returns the topCard
-            System.out.println(deck1);
-
-        } catch (InvocationTargetException | NoSuchMethodException | InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-
+        //use mock deck to check if drawCard method returns top card; we know mockDeck.topCard = Cloverleaf
+        //MockDeck deck1 = new MockDeck();
+        //deck1.drawCard();
+        //assertTrue(deck1.drawCard() instanceof Cloverleaf);
+        //assertTrue(deck1.drawCard() instanceof Fireworks);
     }
 
     //check if Deck.shuffle works
