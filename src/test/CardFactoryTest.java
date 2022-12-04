@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DeckFactoryTest {
+class CardFactoryTest {
 
     @Test
     void testGetCards() {
-        Cloverleaf cloverleaf1 = (Cloverleaf)DeckFactory.getCards("Cloverleaf");
-        Cloverleaf cloverleaf2 = (Cloverleaf)DeckFactory.getCards("Cloverleaf");
+        Cloverleaf cloverleaf1 = (Cloverleaf) CardFactory.getCards("Cloverleaf");
+        Cloverleaf cloverleaf2 = (Cloverleaf) CardFactory.getCards("Cloverleaf");
         Cloverleaf cloverleaf3 = new Cloverleaf("Cloverleaf");
         assertSame(cloverleaf1, cloverleaf2);
         assertNotSame(cloverleaf1, cloverleaf3);
@@ -18,17 +18,17 @@ class DeckFactoryTest {
 
     @Test
     void getBonusCards() {
-        Bonus bonus200_1 = DeckFactory.getBonusCards(200);
-        Bonus bonus200_2 = DeckFactory.getBonusCards(200);
-        Bonus bonus300_1 = DeckFactory.getBonusCards(300);
-        Bonus bonus300_2 = DeckFactory.getBonusCards(300);
-        Bonus bonus400_1 = DeckFactory.getBonusCards(400);
-        Bonus bonus400_2 = DeckFactory.getBonusCards(400);
-        Bonus bonus500_1 = DeckFactory.getBonusCards(500);
-        Bonus bonus500_2 = DeckFactory.getBonusCards(500);
-        Bonus bonus600_1 = DeckFactory.getBonusCards(600);
-        Bonus bonus600_2 = DeckFactory.getBonusCards(600);
-        Bonus bonus600_3 = DeckFactory.getBonusCards(600);
+        Bonus bonus200_1 = CardFactory.getBonusCards(200);
+        Bonus bonus200_2 = CardFactory.getBonusCards(200);
+        Bonus bonus300_1 = CardFactory.getBonusCards(300);
+        Bonus bonus300_2 = CardFactory.getBonusCards(300);
+        Bonus bonus400_1 = CardFactory.getBonusCards(400);
+        Bonus bonus400_2 = CardFactory.getBonusCards(400);
+        Bonus bonus500_1 = CardFactory.getBonusCards(500);
+        Bonus bonus500_2 = CardFactory.getBonusCards(500);
+        Bonus bonus600_1 = CardFactory.getBonusCards(600);
+        Bonus bonus600_2 = CardFactory.getBonusCards(600);
+        Bonus bonus600_3 = CardFactory.getBonusCards(600);
 
         Bonus bonus600 = new Bonus("Bonus", 600);
         Bonus bonus500 = new Bonus("Bonus", 500);

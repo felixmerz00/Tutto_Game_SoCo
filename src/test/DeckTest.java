@@ -34,6 +34,9 @@ class DeckTest {
         List<Card> x2List = new ArrayList<>();
         List<Card> bonList = new ArrayList<>();
 
+        //map -> then for loop map(topCard.display).add(topCard)
+        //return map(name)
+
         for (int i=0; i<56; i++) {
             Card topCard = deck.drawCard();
             if (topCard.display().equals("Cloverleaf")) {cloList.add(topCard);}
