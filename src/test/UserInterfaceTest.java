@@ -38,7 +38,14 @@ class UserInterfaceTest {
     }
 
     @Test
-    void printScoreBoard() {
+    void userInputName() {
+        String input ="\ntimmy";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        assertEquals("timmy", testUserInterface.inputName(1));
+    }
+
+    @Test
+    void printScoreBoard() { // also not testable, creates only console output
     }
 
     @Test
