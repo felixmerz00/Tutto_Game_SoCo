@@ -249,7 +249,7 @@ class TurnLogicTest {
     }
 
     static class StubDeck4 implements DeckInterface{
-        public Card aCard = new PlusMinus("PlusMinus");
+        public Card aCard = new PlusMinus();
         public Card drawCard(){
             return aCard;
         }
@@ -263,7 +263,7 @@ class TurnLogicTest {
     }
 
     static class StubDeck5 implements DeckInterface{
-        public Card aCard = new Cloverleaf("Cloverleaf");
+        public Card aCard = new Cloverleaf();
         public Card drawCard(){
             return aCard;
         }

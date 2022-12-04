@@ -5,8 +5,8 @@ import strategy.CloverleafStrategy;
 public class Cloverleaf extends Card {
 
     /*Constructor creates instance of CloverleafStrategy*/
-    public Cloverleaf(String name) {
-        this.cardName = name;
+    public Cloverleaf() {
+        this.cardName = "Cloverleaf";
         this.strategy = new CloverleafStrategy();
     }
 }

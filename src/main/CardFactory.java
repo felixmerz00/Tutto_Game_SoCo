@@ -2,7 +2,7 @@ import cards.*;
 
 import java.util.HashMap;
 
-public class DeckFactory {
+public class CardFactory {
     private static final HashMap deckMap = new HashMap();
 
     public static Card getCards(String name) {
@@ -11,7 +11,7 @@ public class DeckFactory {
             Card card = (Card) deckMap.get(name);
 
             if (card == null) {
-                card = new Cloverleaf(name);
+                card = new Cloverleaf();
                 deckMap.put(name, card);
             }
             return card;
@@ -21,7 +21,7 @@ public class DeckFactory {
             Card card = (Card) deckMap.get(name);
 
             if (card == null) {
-                card = new Fireworks(name);
+                card = new Fireworks();
                 deckMap.put(name, card);
             }
             return card;
@@ -31,7 +31,7 @@ public class DeckFactory {
             Card card = (Card) deckMap.get(name);
 
             if (card == null) {
-                card = new PlusMinus(name);
+                card = new PlusMinus();
                 deckMap.put(name, card);
             }
             return card;
@@ -41,7 +41,7 @@ public class DeckFactory {
             Card card = (Card) deckMap.get(name);
 
             if (card == null) {
-                card = new Straight(name);
+                card = new Straight();
                 deckMap.put(name, card);
             }
             return card;
@@ -51,27 +51,29 @@ public class DeckFactory {
             Card card = (Card) deckMap.get(name);
 
             if (card == null) {
-                card = new TimesTwo(name);
+                card = new TimesTwo();
                 deckMap.put(name, card);
             }
             return card;
         }
         /*when passed name is Stop, instantiate Stop Card*/
+        else if (name.equals("Stop")) {
+            Card card = (Card) deckMap.get(name);
 
-        Card card = (Card) deckMap.get(name);
-
-        if (card == null) {
-            card = new Stop(name);
-            deckMap.put(name, card);
+            if (card == null) {
+                card = new Stop();
+                deckMap.put(name, card);
+            }
+            return card;
         }
-        return card;
+        return null;
     }
 
     public static Bonus getBonusCards(Integer bonusPoints) {
         Card card = (Card) deckMap.get(bonusPoints);
 
         if (card == null) {
-            card = new Bonus("Bonus", bonusPoints);
+            card = new Bonus(bonusPoints);
             deckMap.put(bonusPoints, card);
         }
         return (Bonus) card;

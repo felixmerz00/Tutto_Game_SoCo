@@ -10,8 +10,8 @@ public class Tuple {
     public int points;
     public boolean success;
 
-    public Tuple(int points, boolean achievedTutto){
+    public Tuple(int points, boolean success){
         this.points = points;
-        this.success = achievedTutto;
+        this.success = success;
     }
 }

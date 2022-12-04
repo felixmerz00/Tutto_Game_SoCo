@@ -19,7 +19,7 @@ public class Deck implements DeckInterface {
         // Put cards in deck
 
         /*Instantiate 1 Cloverleaf Card Instance in deck*/
-        Cloverleaf cloverleaf = (Cloverleaf)DeckFactory.getCards("Cloverleaf");
+        Cloverleaf cloverleaf = (Cloverleaf) CardFactory.getCards("Cloverleaf");
         deck.add(cloverleaf);
 
         /*Instantiate 1 Fireworks Card and put 5 References in deck
@@ -27,33 +27,33 @@ public class Deck implements DeckInterface {
         * Instantiate 1 PlusMinus Card and put 5 References in deck
         * Instantiate 1 TimesTwo Card and put 5 References in deck*/
         for (int i = 0; i<5; i++) {
-            Fireworks fireworks = (Fireworks)DeckFactory.getCards("Fireworks");
+            Fireworks fireworks = (Fireworks) CardFactory.getCards("Fireworks");
             deck.add(fireworks);
-            Straight straight = (Straight)DeckFactory.getCards("Straight");
+            Straight straight = (Straight) CardFactory.getCards("Straight");
             deck.add(straight);
-            PlusMinus plusMinus = (PlusMinus)DeckFactory.getCards("PlusMinus");
+            PlusMinus plusMinus = (PlusMinus) CardFactory.getCards("PlusMinus");
             deck.add(plusMinus);
-            TimesTwo timesTwo = (TimesTwo)DeckFactory.getCards("x2");
+            TimesTwo timesTwo = (TimesTwo) CardFactory.getCards("x2");
             deck.add(timesTwo);
         }
 
         /*Instantiate 1 Stop Card Instance and put 10 References in deck*/
         for (int i = 0; i<10; i++) {
-            Stop stop = (Stop) DeckFactory.getCards("Stop");
+            Stop stop = (Stop) CardFactory.getCards("Stop");
             deck.add(stop);
         }
 
         /*Instantiate 5 Bonus Cards (200, 300, 400, 500, 600) and put 5 References each*/
         for (int i=0; i<5; i++) {
-            Bonus bonus200 = DeckFactory.getBonusCards(200);
+            Bonus bonus200 = CardFactory.getBonusCards(200);
             deck.add(bonus200);
-            Bonus bonus300 = DeckFactory.getBonusCards(300);
+            Bonus bonus300 = CardFactory.getBonusCards(300);
             deck.add(bonus300);
-            Bonus bonus400 = DeckFactory.getBonusCards(400);
+            Bonus bonus400 = CardFactory.getBonusCards(400);
             deck.add(bonus400);
-            Bonus bonus500 = DeckFactory.getBonusCards(500);
+            Bonus bonus500 = CardFactory.getBonusCards(500);
             deck.add(bonus500);
-            Bonus bonus600 = DeckFactory.getBonusCards(600);
+            Bonus bonus600 = CardFactory.getBonusCards(600);
             deck.add(bonus600);
         }
 
