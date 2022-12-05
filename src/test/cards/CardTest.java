@@ -43,7 +43,7 @@ class CardTest {
     }
 
     @Test
-    void getStrategy() {
+    void testGetStrategy() {
         //check if get strategy returns cloverleaf.strategy
         Cloverleaf cloverleaf = new Cloverleaf();
         assertTrue(cloverleaf.getStrategy() == cloverleaf.strategy);
