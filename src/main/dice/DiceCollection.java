@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class DiceCollection implements DiceCollectionInterface{
     //create 6 dices
-    protected ArrayList<Dice> TheDice = new ArrayList<>();
-    protected ArrayList<Dice> putBackDice = new ArrayList<>();
+    private final ArrayList<Dice> TheDice = new ArrayList<>();
+    private final ArrayList<Dice> putBackDice = new ArrayList<>();
 
     protected int points = 0;
 
