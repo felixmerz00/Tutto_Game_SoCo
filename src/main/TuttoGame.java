@@ -69,6 +69,8 @@ public class TuttoGame {
             }
 
             // Let players take turns (delegated to TurnLogic)
+            // returns if a special point or win condition must be applied
+            // 0 = nothing, 1 = deduct the best player 1000, 2 = instant win by tutto
             int finishCondition;
             finishCondition = turn.playTurn(playerList.get(player));
 
