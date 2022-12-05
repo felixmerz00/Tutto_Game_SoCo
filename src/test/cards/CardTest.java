@@ -4,54 +4,80 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
-import strategy.CloverleafStrategy;
-
-import java.lang.reflect.Field;
+import strategy.*;
 
 class CardTest {
+    //creat one instance of each card, so we don't have to repeat code in the tests
+    Card cloverleaf = new Cloverleaf();
+    Card fireworks = new Fireworks();
+    Card plusMinus = new PlusMinus();
+    Card stop = new Stop();
+    Card straight = new Straight();
+    Card timesTwo = new TimesTwo();
     //test for every card if display method works, except Bonus Cards -> test in BonusTest
     @Test
     void testDisplayCloverleaf() {
-        Card cloverleaf = new Cloverleaf();
-        assertTrue(cloverleaf.display().equals("Cloverleaf"));
+        assertEquals("Cloverleaf", cloverleaf.display());
     }
     @Test
     void testDisplayFireworks() {
-        Card fireworks = new Fireworks();
-        assertTrue(fireworks.display().equals("Fireworks"));
+        assertEquals("Fireworks", fireworks.display());
     }
     @Test
     void testDisplayPlusMinus() {
-        Card plusMinus = new PlusMinus();
-        assertTrue(plusMinus.display().equals("PlusMinus"));
+        assertEquals("PlusMinus", plusMinus.display());
     }
     @Test
     void testDisplayStop() {
-        Card stop = new Stop();
-        assertTrue(stop.display().equals("Stop"));
+        assertEquals("Stop", stop.display());
     }
     @Test
     void testDisplayStraight() {
-        Card straight = new Straight();
-        assertTrue(straight.display().equals("Straight"));
+        assertEquals("Straight", straight.display());
     }
     @Test
     void testDisplayTimesTwo() {
-        Card timesTwo = new TimesTwo();
-        assertTrue(timesTwo.display().equals("x2"));
+        assertEquals("x2", timesTwo.display());
     }
 
     @Test
-    void testGetStrategy() {
+    void testGetStrategyCloverleaf() {
         //check if get strategy returns cloverleaf.strategy
-        Cloverleaf cloverleaf = new Cloverleaf();
-        assertTrue(cloverleaf.getStrategy() == cloverleaf.strategy);
+        assertSame(cloverleaf.getStrategy(), cloverleaf.strategy);
+    }
+    @Test
+    void testGetStrategyFireworks() {
+        //check if get strategy returns cloverleaf.strategy
+        assertSame(fireworks.getStrategy(), fireworks.strategy);
+    }
+    @Test
+    void testGetStrategyPlusMinus() {
+        //check if get strategy returns cloverleaf.strategy
+        assertSame(plusMinus.getStrategy(), plusMinus.strategy);
+    }
+    @Test
+    void testGetStrategyStop() {
+        //check if get strategy returns cloverleaf.strategy
+        assertSame(stop.getStrategy(), stop.strategy);
+    }
+    @Test
+    void testGetStrategyStraight() {
+        //check if get strategy returns cloverleaf.strategy
+        assertSame(straight.getStrategy(), straight.strategy);
+    }
+    @Test
+    void testGetStrategyTimesTwo() {
+        //check if get strategy returns cloverleaf.strategy
+        assertSame(timesTwo.getStrategy(), timesTwo.strategy);
     }
     @Test
     void testSetStrategy() {
         //check if correct strategy is set
-        Cloverleaf cloverleaf = new Cloverleaf();
         assertTrue(cloverleaf.strategy instanceof CloverleafStrategy);
+        assertTrue(fireworks.strategy instanceof FireworksStrategy);
+        assertTrue(plusMinus.strategy instanceof PlusMinusStrategy);
+        assertTrue(stop.strategy instanceof StopStrategy);
+        assertTrue(straight.strategy instanceof StraightStrategy);
+        assertTrue(timesTwo.strategy instanceof TimesTwoStrategy);
     }
 }
