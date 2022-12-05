@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TuttoGame {
 
@@ -36,6 +37,7 @@ public class TuttoGame {
         for (int i = 0; i < numberOfPlayers; i++){
             playerList.add(new Player(i+1));
         }
+        Collections.shuffle(playerList);
 
     }
 
