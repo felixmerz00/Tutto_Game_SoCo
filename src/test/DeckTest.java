@@ -1,7 +1,6 @@
 import cards.*;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -97,7 +96,7 @@ class DeckTest {
 
     //check if Singleton works; do we get the same deck with Deck.getDeck()?
     @Test
-    void getDeck() {
+    void testGetDeck() {
         Deck deck1 = Deck.getDeck();
         assertEquals(deck1, deck);
     }
@@ -213,10 +212,10 @@ class DeckTest {
     @Test
     void testDrawCard() {
         //use mock deck to check if drawCard method returns top card; we know mockDeck.topCard = Cloverleaf
-        //MockDeck deck1 = new MockDeck();
-        //deck1.drawCard();
-        //assertTrue(deck1.drawCard() instanceof Cloverleaf);
-        //assertTrue(deck1.drawCard() instanceof Fireworks);
+        MockDeck deck1 = new MockDeck();
+        deck1.drawCard();
+        assertTrue(deck1.drawCard() instanceof Cloverleaf);
+        assertTrue(deck1.drawCard() instanceof Fireworks);
     }
 
     //check if Deck.shuffle works
