@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class MockDiceCollection extends DiceCollection implements DiceCollectionInterface {
 
     //create 6 dices
-    private final ArrayList<DiceInterface> Values = new ArrayList<>();
+    private final ArrayList<Dice> Values = new ArrayList<>();
 
     public MockDiceCollection() {
         super();
