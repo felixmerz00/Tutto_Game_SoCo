@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import strategy.CloverleafStrategy;
+
+import java.lang.reflect.Field;
 
 class CardTest {
     //test for every card if display method works, except Bonus Cards -> test in BonusTest
@@ -41,5 +44,14 @@ class CardTest {
 
     @Test
     void getStrategy() {
+        //check if get strategy returns cloverleaf.strategy
+        Cloverleaf cloverleaf = new Cloverleaf();
+        assertTrue(cloverleaf.getStrategy() == cloverleaf.strategy);
+    }
+    @Test
+    void testSetStrategy() {
+        //check if correct strategy is set
+        Cloverleaf cloverleaf = new Cloverleaf();
+        assertTrue(cloverleaf.strategy instanceof CloverleafStrategy);
     }
 }
