@@ -71,13 +71,34 @@ class CardTest {
         assertSame(timesTwo.getStrategy(), timesTwo.strategy);
     }
     @Test
-    void testSetStrategy() {
+    void testSetStrategyCloverleaf() {
         //check if correct strategy is set
         assertTrue(cloverleaf.strategy instanceof CloverleafStrategy);
+    }
+    @Test
+    void testSetStrategyFireworks() {
+        //check if correct strategy is set
         assertTrue(fireworks.strategy instanceof FireworksStrategy);
+    }
+    @Test
+    void testSetStrategyPlusMinus() {
+        //check if correct strategy is set
         assertTrue(plusMinus.strategy instanceof PlusMinusStrategy);
+    }
+    @Test
+    void testSetStrategyStop() {
+        //check if correct strategy is set
         assertTrue(stop.strategy instanceof StopStrategy);
+    }
+    @Test
+    void testSetStrategyStraight() {
+        //check if correct strategy is set
         assertTrue(straight.strategy instanceof StraightStrategy);
+    }
+    @Test
+    void testSetStrategyTimesTwo() {
+        //check if correct strategy is set
         assertTrue(timesTwo.strategy instanceof TimesTwoStrategy);
     }
+
 }
