@@ -17,7 +17,7 @@ class CardFactoryTest {
     }
 
     @Test
-    void getBonusCards() {
+    void testGetBonusCards() {
         Bonus bonus200_1 = CardFactory.getBonusCards(200);
         Bonus bonus200_2 = CardFactory.getBonusCards(200);
         Bonus bonus300_1 = CardFactory.getBonusCards(300);

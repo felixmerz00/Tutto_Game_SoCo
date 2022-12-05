@@ -14,6 +14,7 @@ class CardTest {
     Card stop = new Stop();
     Card straight = new Straight();
     Card timesTwo = new TimesTwo();
+
     //test for every card if display method works, except Bonus Cards -> test in BonusTest
     @Test
     void testDisplayCloverleaf() {

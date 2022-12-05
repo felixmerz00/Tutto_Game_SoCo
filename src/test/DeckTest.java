@@ -1,41 +1,21 @@
-import cards.*;
+import cards.Card;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 class DeckTest {
     //create Deck with getDeck method
     Deck deck = Deck.getDeck();
 
-    //make one instance of each card
-    /*Card cloverleaf = new Cloverleaf("Cloverleaf");
-    Card bonus200 = new Bonus("Bonus",200);
-    Card bonus300 = new Bonus("Bonus", 300);
-    Card bonus400 = new Bonus("Bonus", 400);
-    Card bonus500 = new Bonus("Bonus", 500);
-    Card bonus600 = new Bonus("Bonus", 600);
-    Card fireworks = new Fireworks("Fireworks");
-    Card plusminus= new PlusMinus("PlusMinus");
-    Card stop = new Stop("Stop");
-    Card straight = new Straight("Straight");
-    Card timestwo = new TimesTwo("x2");*/
-
     //method to use in Tests where we check if correct amount of cards are in deck
     private List<Card> getList(String name) {
-        //create 7 List; one for each type of cards
-        /*List<Card> cloList = new ArrayList<>();
-        List<Card> fwList = new ArrayList<>();
-        List<Card> sList = new ArrayList<>();
-        List<Card> strList = new ArrayList<>();
-        List<Card> pmList = new ArrayList<>();
-        List<Card> x2List = new ArrayList<>();
-        List<Card> bonList = new ArrayList<>();*/
-
         Map<String, List<Card>> cardDict = new HashMap<>();
 
         //map -> then for loop map(topCard.display).add(topCard)
@@ -57,42 +37,8 @@ class DeckTest {
             //if topCardName already as Key in dictList, add topCard to its Arraylist
             else {cardDict.get(topCardName).add(topCard);}
         }
-            /*if (topCard.display().equals("Cloverleaf")) {cloList.add(topCard);}
-            if (topCard.display().equals("Fireworks")) {fwList.add(topCard);}
-            if (topCard.display().equals("Stop")) {sList.add(topCard);}
-            if (topCard.display().equals("Straight")) {strList.add(topCard);}
-            if (topCard.display().equals("PlusMinus")) {pmList.add(topCard);}
-            if (topCard.display().equals("x2")) {x2List.add(topCard);}
-            if (topCard.display().equals("Bonus (200)") || topCard.display().equals("Bonus (300)") || topCard.display().equals("Bonus (400)") ||
-                    topCard.display().equals("Bonus (500)") || topCard.display().equals("Bonus (600)")) {
-                bonList.add(topCard);}*/
         return cardDict.get(name);
-
-
-        /*return switch (name) {
-            case "Cloverleaf" -> cloList;
-            case "Fireworks" -> fwList;
-            case "Stop" -> sList;
-            case "Straight" -> strList;
-            case "PlusMinus" -> pmList;
-            case "x2" -> x2List;
-            case "Bonus" -> bonList;
-            def*/
     }
-
-
-
-
-    //create List (=Deck) for test methods with only one type of card
-    //-> does not matter which type (we want to test if Deck.methods work)
-    //List<Card> testDeck = new ArrayList<>();
-    /*for (int i=0; i<56; i++) {
-        Card stop = new Stop("Stop");
-        testDeck.add(stop);
-    }*/
-    //index to
-    //private int idx = 0;
-
 
     //check if Singleton works; do we get the same deck with Deck.getDeck()?
     @Test
@@ -109,7 +55,7 @@ class DeckTest {
         assertEquals(56, size);
     }
 
-    //Test to check if all 56 cards have been displayed:
+    //Test to check if all 56 cards are in the deck with correct amount (e.g. 10 Stop cards):
     //check if deck contains 1 cloverleaf card
     @Test
     void cloverleafInDeck() {
@@ -178,7 +124,6 @@ class DeckTest {
 
     //even if Deck.isEmpty method is indirectly tested by other Test Methods in TestDeck,
     //we make a test for isEmpty function to test it in isolation
-
     //we create helper method using metaprogramming, so we can bypass the access restriction of private keyword in Deck.isEmpty method
     private boolean isEmpty() {
         try {
@@ -204,18 +149,6 @@ class DeckTest {
         //when drawing a new card, the deck is reshuffled and index is set to 0, so isEmpty should return false
         deck.drawCard();
         assertFalse(isEmpty());
-    }
-
-    //because the implementation of class Deck is a realization of FLYWEIGHT and its constructor is private,
-    //we use metaprogramming to get around the pattern and create a duplicate of deck
-
-    @Test
-    void testDrawCard() {
-        //use mock deck to check if drawCard method returns top card; we know mockDeck.topCard = Cloverleaf
-        MockDeck deck1 = new MockDeck();
-        deck1.drawCard();
-        assertTrue(deck1.drawCard() instanceof Cloverleaf);
-        assertTrue(deck1.drawCard() instanceof Fireworks);
     }
 
     //check if Deck.shuffle works
